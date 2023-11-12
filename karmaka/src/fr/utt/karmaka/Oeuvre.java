@@ -3,7 +3,7 @@ package fr.utt.karmaka;
 public class Oeuvre extends Emplacement {
 	
 	public Oeuvre() {
-		
+		super();
 	}
 	
 	public int calculerPointsRouges() {

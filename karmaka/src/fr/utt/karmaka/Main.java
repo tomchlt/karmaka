@@ -3,12 +3,12 @@ package fr.utt.karmaka;
 public class Main extends Emplacement {
 	
 	public Main() {
-		
+		super();
 	}
 	
 	public void jouerCartePoints(Carte carte) {
 		Oeuvre oeuvre;
-		deplacerCarteVers(carte, oeuvre);
+		deplacerCarteVers(carte, getOeuvre());
 	}
 	
 	public void jouerCartePouvoir(Carte carte) {

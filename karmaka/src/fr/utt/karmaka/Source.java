@@ -5,7 +5,7 @@ public class Source extends Emplacement {
 	private static Source source;
 	
 	private Source() {
-		
+		super();
 	}
 	
 	public static Source getInstance() {

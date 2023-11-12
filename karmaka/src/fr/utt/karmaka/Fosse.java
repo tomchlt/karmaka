@@ -5,7 +5,7 @@ public class Fosse extends Emplacement {
 	private static Fosse fosse;
 	
 	private Fosse() {
-		
+		super();
 	}
 	
 	public static Fosse getInstance() {
