@@ -7,7 +7,7 @@ public class Carte {
 	private int pointsBleus;
 	private String descriptionCapacite;
 
-	public Carte(int pointsRouges, int pointsVerts, int pointsBleus, String description) {
+	public Carte(int pointsRouges, int pointsVerts, int pointsBleus, String descriptionCapacite) {
 		this.descriptionCapacite = descriptionCapacite;
 		this.pointsRouges = pointsRouges;
 		this.pointsVerts = pointsVerts;
