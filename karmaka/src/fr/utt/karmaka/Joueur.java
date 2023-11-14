@@ -1,7 +1,7 @@
 package fr.utt.karmaka;
 
-public class Joueur {
-	
+public abstract class Joueur {
+
 	private String nom;
 	private boolean aGagne;
 	private int nbAnneauxKarmiques;
@@ -13,7 +13,7 @@ public class Joueur {
 	private Tempo tempo;
 	private Source source;
 	private Fosse fosse;
-	
+
 	public Joueur(String nom, Source source, Fosse fosse) {
 		this.nom = nom;
 		this.aGagne = false;
@@ -27,57 +27,10 @@ public class Joueur {
 		this.source = source;
 		this.fosse = fosse;
 	}
-	
+
 	public void tour() {
-		
-		// on vérifie si l'adversaire a transmis une carte au joueur
-		if (tempo.compterCartes()>0) {
-			int choix;
-			while (tempo.compterCartes()>0) {
-				choix = 0;
-				while (choix!=1 && choix!=2) {
-					// A RAJOUTER : demander au joueur s'il veut mettre la carte dans sa main ou s'il la défausse
-				}
-				if (choix==1) {
-					tempo.deplacerCarteVers(carte, main);
-				}
-				else {
-					tempo.deplacerCarteVers(carte, fosse);
-				}
-			}
-		}
-		
-		// on vérifie si le joueur doit se réincarner
-		if (pile.compterCartes()==0 && main.compterCartes()==0) {
-			seReincarner();
-		}
-		
-		// si le joueur ne se réincarne pas, il joue
-		else {
-			
-			// si la pile du joueur n'est pas vide, il y pioche une carte
-			if (pile.compterCartes()>0) {
-				piocher();
-			}
-			else {
-				System.out.println("Vous ne pouvez pas piocher (votre pile est vide)");
-			}
-			
-			// si le joueur peut passer, on lui demande s'il veut passer
-			boolean veutPasser = false;
-			if (pile.compterCartes()>0) {
-				// A RAJOUTER : demander au joueur s'il veut passer
-			}
-			
-			// si le joueur ne peut pas passer ou qu'il ne veut pas passer, il joue une carte
-			if (pile.compterCartes()==0 || veutPasser==false) {
-				jouer();
-			}
-			
-		}
-		
 	}
-	
+
 	public void seReincarner() {
 		System.out.println("Vous tentez de vous réincarner...");
 		int pointsMax;
@@ -88,89 +41,87 @@ public class Joueur {
 				nbAnneauxKarmiques -= (niveauKarmique.getPointsRequis() - pointsMax);
 			}
 			switch (niveauKarmique) {
-				case BOUSIER:
-					niveauKarmique = NiveauKarmique.SERPENT;
-					System.out.println("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
-					break;
-				case SERPENT:
-					niveauKarmique = NiveauKarmique.LOUP;
-					System.out.println("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
-					break;
-				case LOUP:
-					niveauKarmique = NiveauKarmique.SINGE;
-					System.out.println("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
-					break;
-				case SINGE:
-					aGagne = true;
-					System.out.println("Vous accédez à la Transcendance !");
-					break;
-				default:
-					System.out.println("Erreur dans l'augmentation du niveau karmique");
-					break;
+			case BOUSIER:
+				niveauKarmique = NiveauKarmique.SERPENT;
+				System.out.println("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
+				break;
+			case SERPENT:
+				niveauKarmique = NiveauKarmique.LOUP;
+				System.out.println("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
+				break;
+			case LOUP:
+				niveauKarmique = NiveauKarmique.SINGE;
+				System.out.println("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
+				break;
+			case SINGE:
+				aGagne = true;
+				System.out.println("Vous accédez à la Transcendance !");
+				break;
+			default:
+				System.out.println("Erreur dans l'augmentation du niveau karmique");
+				break;
 			}
-		}
-		else {
+		} else {
 			nbAnneauxKarmiques += 1;
 			System.out.println("Votre réincarnation a échoué, vous recevez 1 anneau karmique.");
 		}
 	}
-	
+
 	public void piocher() {
 		// A RAJOUTER : une carte est chosie au hasard dans la pile du joueur
 		pile.deplacerCarteVers(carte, main);
 		System.out.println("Vous avez pioché 1 carte");
 	}
-	
+
 	public void jouer() {
 		String choix = null;
-		while (choix!="points" || choix!="pouvoir" || choix!="futur") {
-			// A RAJOUTER : demander au joueur quelle carte il veut jouer et comment il veut la jouer
+		while (choix != "points" || choix != "pouvoir" || choix != "futur") {
+			// A RAJOUTER : demander au joueur quelle carte il veut jouer et comment il veut
+			// la jouer
 		}
-		if (choix=="points") {
+		if (choix == "points") {
 			main.jouerCartePoints(carte);
-		}
-		else if (choix=="pouvoir") {
+		} else if (choix == "pouvoir") {
 			main.jouerCartePouvoir(carte);
-		}
-		else if (choix=="futur") {
+		} else if (choix == "futur") {
 			main.jouerCarteFutur(carte);
 		}
 	}
-	
+
 	public String getNom() {
 		return nom;
 	}
-	
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public boolean getAGagne() {
 		return aGagne;
 	}
-	
+
 	public void setAGagne(boolean aGagne) {
 		this.aGagne = aGagne;
 	}
-	
+
 	public int getNbAnneauxKarmiques() {
 		return nbAnneauxKarmiques;
 	}
-	
+
 	public void setNbAnneauxKarmiques(int nbAnneauxKarmiques) {
 		this.nbAnneauxKarmiques = nbAnneauxKarmiques;
 	}
-	
+
 	public NiveauKarmique getNiveauKarmique() {
 		return niveauKarmique;
 	}
-	
+
 	public void setNiveauKarmique(NiveauKarmique niveauKarmique) {
 		this.niveauKarmique = niveauKarmique;
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 	}
 
 }
