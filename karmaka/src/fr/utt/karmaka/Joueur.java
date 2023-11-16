@@ -6,13 +6,13 @@ public abstract class Joueur {
 	private boolean aGagne;
 	private int nbAnneauxKarmiques;
 	private NiveauKarmique niveauKarmique;
-	private Main main;
-	private Pile pile;
-	private Oeuvre oeuvre;
-	private VieFuture vieFuture;
-	private Tempo tempo;
-	private Source source;
-	private Fosse fosse;
+	protected Main main;
+	protected Pile pile;
+	protected Oeuvre oeuvre;
+	protected VieFuture vieFuture;
+	protected Tempo tempo;
+	protected Source source;
+	protected Fosse fosse;
 
 	public Joueur(String nom, Source source, Fosse fosse) {
 		this.nom = nom;
