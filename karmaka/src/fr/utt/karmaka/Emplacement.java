@@ -11,11 +11,18 @@ public class Emplacement {
 		listeCartes = new LinkedList<Carte>();
 	}
 
-	public void deplacerCarteVers(Carte carte, LinkedList<Carte> listeCartes) {
-		//méthode add à corriger
-		listeCartes.add(carte);
-		}
-
+	public void deplacerCarteVers(Carte carte, Emplacement emplacement) {
+		emplacement.getListeCartes().add(carte);
+		listeCartes.remove(carte);
+	}
+	
+	public LinkedList<Carte> getListeCartes() {
+		return listeCartes;
+	}
+	
+	public void setListeCartes(LinkedList<Carte> listeCartes) {
+		this.listeCartes = listeCartes;
+	}
 
 	public int compterCartes() {
 		return listeCartes.size();
