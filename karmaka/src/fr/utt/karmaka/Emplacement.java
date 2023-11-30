@@ -4,25 +4,25 @@ import java.util.*;
 
 public class Emplacement {
 
-	private LinkedList<Carte> emplacement;
+	private LinkedList<Carte> listeCartes;
 
 
 	public Emplacement() {
-		emplacement = new LinkedList<Carte>();
+		listeCartes = new LinkedList<Carte>();
 	}
 
-	public void deplacerCarteVers(Carte carte, Emplacement emplacement) {
+	public void deplacerCarteVers(Carte carte, LinkedList<Carte> listeCartes) {
 		//méthode add à corriger
-		emplacement.add(carte);
+		listeCartes.add(carte);
 		}
 
 
 	public int compterCartes() {
-		return emplacement.size();
+		return listeCartes.size();
 	}
 
 	public static void main(String[] args) {
-
+		
 	}
 
 }
