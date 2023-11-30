@@ -2,16 +2,18 @@ package fr.utt.karmaka;
 
 public class Carte {
 	
+	private String nom;
 	private int pointsRouges;
 	private int pointsVerts;
 	private int pointsBleus;
 	private String descriptionCapacite;
 
-	public Carte(int pointsRouges, int pointsVerts, int pointsBleus, String descriptionCapacite) {
+	public Carte(int pointsRouges, int pointsVerts, int pointsBleus, String descriptionCapacite, String nomCarte) {
 		this.descriptionCapacite = descriptionCapacite;
 		this.pointsRouges = pointsRouges;
 		this.pointsVerts = pointsVerts;
 		this.pointsBleus = pointsBleus;
+		this.nom = nomCarte;
 	}
 	
 	public void activerCapacite() {
@@ -44,6 +46,14 @@ public class Carte {
 
 	public void setPointsBleus(int pointsBleus) {
 		this.pointsBleus = pointsBleus;
+	}
+	
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public String getDescriptionCapacite() {
