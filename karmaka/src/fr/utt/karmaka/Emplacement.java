@@ -4,8 +4,7 @@ import java.util.*;
 
 public class Emplacement {
 
-	private LinkedList<Carte> listeCartes;
-
+	protected LinkedList<Carte> listeCartes;
 
 	public Emplacement() {
 		listeCartes = new LinkedList<Carte>();

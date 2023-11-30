@@ -22,4 +22,36 @@ public class Carte {
 		
 	}
 
+	public int getPointsRouges() {
+		return pointsRouges;
+	}
+
+	public void setPointsRouges(int pointsRouges) {
+		this.pointsRouges = pointsRouges;
+	}
+
+	public int getPointsVerts() {
+		return pointsVerts;
+	}
+
+	public void setPointsVerts(int pointsVerts) {
+		this.pointsVerts = pointsVerts;
+	}
+
+	public int getPointsBleus() {
+		return pointsBleus;
+	}
+
+	public void setPointsBleus(int pointsBleus) {
+		this.pointsBleus = pointsBleus;
+	}
+
+	public String getDescriptionCapacite() {
+		return descriptionCapacite;
+	}
+
+	public void setDescriptionCapacite(String descriptionCapacite) {
+		this.descriptionCapacite = descriptionCapacite;
+	}
+
 }

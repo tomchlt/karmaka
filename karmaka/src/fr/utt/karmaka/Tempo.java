@@ -2,7 +2,7 @@ package fr.utt.karmaka;
 
 public class Tempo extends Emplacement {
 	
-	private Tempo() {
+	public Tempo() {
 		super();	
 	}
 	
