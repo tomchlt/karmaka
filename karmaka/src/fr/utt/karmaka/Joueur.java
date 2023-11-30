@@ -19,7 +19,7 @@ public abstract class Joueur {
 		this.aGagne = false;
 		this.nbAnneauxKarmiques = 0;
 		this.niveauKarmique = NiveauKarmique.BOUSIER;
-		this.main = new Main();
+		this.main = new Main(this);
 		this.pile = new Pile();
 		this.oeuvre = new Oeuvre();
 		this.vieFuture = new VieFuture();
