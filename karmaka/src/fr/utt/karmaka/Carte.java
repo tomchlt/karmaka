@@ -1,29 +1,42 @@
 package fr.utt.karmaka;
 
-public class Carte {
+public abstract class Carte {
 	
-	private String nom;
-	private int pointsRouges;
-	private int pointsVerts;
-	private int pointsBleus;
-	private String descriptionCapacite;
-
-	public Carte(int pointsRouges, int pointsVerts, int pointsBleus, String descriptionCapacite, String nomCarte) {
-		this.descriptionCapacite = descriptionCapacite;
+	protected int pointsRouges;
+	protected int pointsVerts;
+	protected int pointsBleus;
+	protected String nom;
+	protected String description;
+	protected Partie partie;
+	
+	public Carte(int pointsRouges, int pointsVerts, int pointsBleus, String nom, String description, Partie partie) {
 		this.pointsRouges = pointsRouges;
 		this.pointsVerts = pointsVerts;
 		this.pointsBleus = pointsBleus;
-		this.nom = nomCarte;
+		this.nom = nom;
+		this.description = description;
+		this.partie = partie;
 	}
 	
-	public void activerCapacite() {
-		
+	public void activerCapacite() {}
+	
+	public Joueur determinerJoueurAdverse(Joueur joueur) {
+		Joueur joueurAdverse;
+		if (joueur==partie.getJoueur1()) {
+			joueurAdverse = partie.getJoueur2();
+		} else if (joueur==partie.getJoueur2()) {
+			joueurAdverse = partie.getJoueur1();
+		} else {
+			joueurAdverse=null;
+			System.out.println("Erreur : le joueur adverse n'a pas pu être trouvé");
+		}
+		return joueurAdverse;
 	}
 	
 	public static void main(String[] args) {
 		
 	}
-
+	
 	public int getPointsRouges() {
 		return pointsRouges;
 	}
@@ -56,12 +69,20 @@ public class Carte {
 		this.nom = nom;
 	}
 
-	public String getDescriptionCapacite() {
-		return descriptionCapacite;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescriptionCapacite(String descriptionCapacite) {
-		this.descriptionCapacite = descriptionCapacite;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public Partie getPartie() {
+		return partie;
+	}
+	
+	public void setPartie(Partie partie) {
+		this.partie = partie;
 	}
 
 }
