@@ -41,6 +41,10 @@ public class Partie {
 	
 	public void lancerPartie() {
 		
+		creerCartes();
+		
+		distribuerCartes();
+		
 		Joueur[] ordre = designerOrdreJoueurs(joueur1, joueur2);
 		setJoueur1(ordre[0]);
 		setJoueur2(ordre[1]);
@@ -76,6 +80,54 @@ public class Partie {
 			ordre[1]=joueur1;
 		}
 		return ordre; 
+	}
+	
+	public void creerCartes() {
+		// création des cartes en 3 exemplaires
+		for (int i=0;i<3;i++) {
+			source.add(new Transmigration(partie));
+			source.add(new CoupDOeil(partie));
+			source.add(new Destinee(partie));
+			source.add(new RevesBrises(partie));
+			source.add(new Deni(partie));
+			source.add(new Lendemain(partie));
+			source.add(new Recyclage(partie));
+			source.add(new Sauvetage(partie));
+			source.add(new Longevite(partie));
+			source.add(new Semis(partie));
+			source.add(new Panique(partie));
+			source.add(new DernierSouffle(partie));
+			source.add(new Crise(partie));
+			source.add(new Roulette(partie));
+			source.add(new Fournaise(partie));
+		}
+		// création des cartes en 2 exemplaires
+		for (int i=0;i<2;i++) {
+			source.add(new Duperie(partie));
+			source.add(new Vol(partie));
+			source.add(new Voyage(partie));
+			source.add(new Jubile(partie));
+			source.add(new Vengeance(partie));
+			source.add(new Bassesse(partie));
+			source.add(new Mimetisme(partie));
+		}
+		// création des cartes en 5 exemplaires
+		for (int i=0;i<5;i++) {
+			source.add(new Incarnation(partie));
+		}
+	}
+	
+	public void distribuerCartes() {
+		// on distribue 4 cartes à chaque joueur pour constituer leur main de départ
+		for (int i=0;i<4;i++) {
+			joueur1.puiser(joueur1.main);
+			joueur2.puiser(joueur2.main);
+		}
+		// on distribue 2 cartes à chaque joueur pour constituer leur pile de départ
+		for (int i=0;i<2;i++) {
+			joueur1.puiser();
+			joueur2.puiser();
+		}
 	}
 	
 	public static void introduction() {
