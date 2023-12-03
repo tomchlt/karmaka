@@ -1,33 +1,45 @@
 package fr.utt.karmaka;
 
-import java.util.Random;
+import java.util.*;
 
 public class Partie {
 	
 	private static Partie partie;
 	
-	private Source source;
-	private Fosse fosse;
 	private Joueur joueur1;
 	private Joueur joueur2;
+	private LinkedList<Carte> source;
+	private LinkedList<Carte> fosse;
 	
-	private Partie() {
-		this.source = Source.getInstance();
-		this.fosse = Fosse.getInstance();
-		this.joueur1 = new Joueur("Joueur 1", source, fosse);
-		this.joueur2 = new Joueur("Joueur 2", source, fosse);
+	private Partie(JoueurHumain joueur1, JoueurVirtuel joueur2, LinkedList<Carte> source, LinkedList<Carte> fosse) {
+		this.joueur1 = joueur1;
+		this.joueur2 = joueur2;
+		this.source = source;
+		this.fosse = fosse;
 	}
 	
-	public static Partie getInstance() {
+	private Partie(JoueurHumain joueur1, JoueurHumain joueur2, LinkedList<Carte> source, LinkedList<Carte> fosse) {
+		this.joueur1 = joueur1;
+		this.joueur2 = joueur2;
+		this.source = source;
+		this.fosse = fosse;
+	}
+	
+	public static Partie getInstance(JoueurHumain joueur1, JoueurVirtuel joueur2, LinkedList<Carte> source, LinkedList<Carte> fosse) {
 		if (partie==null) {
-			partie = new Partie();
+			partie = new Partie(joueur1, joueur2, source, fosse);
+		}
+		return partie;
+	}
+	
+	public static Partie getInstance(JoueurHumain joueur1, JoueurHumain joueur2, LinkedList<Carte> source, LinkedList<Carte> fosse) {
+		if (partie==null) {
+			partie = new Partie(joueur1, joueur2, source, fosse);
 		}
 		return partie;
 	}
 	
 	public void lancerPartie() {
-		
-		
 		
 		Joueur[] ordre = designerOrdreJoueurs(joueur1, joueur2);
 		setJoueur1(ordre[0]);
@@ -72,22 +84,6 @@ public class Partie {
 		System.out.println("Marquez des points, préparez le terrain de votre prochaine vie et si nécessaire, semez des embûches sur le chemin de vos rivaux. Souvenez-vous cependant que l'on récolte ce que l'on sème, et que vos actions auront des conséquences dans cette vie... et dans la suivante.");
 	}
 	
-	public Source getSource() {
-		return source;
-	}
-	
-	public void setSource(Source source) {
-		this.source = source;
-	}
-	
-	public Fosse getFosse() {
-		return fosse;
-	}
-	
-	public void setFosse(Fosse fosse) {
-		this.fosse = fosse;
-	}
-	
 	public Joueur getJoueur1() {
 		return joueur1;
 	}
@@ -104,17 +100,39 @@ public class Partie {
 		this.joueur2 = joueur2;
 	}
 	
+	public LinkedList<Carte> getSource() {
+		return source;
+	}
+	
+	public void setSource(LinkedList<Carte> source) {
+		this.source = source;
+	}
+	
+	public LinkedList<Carte> getFosse() {
+		return fosse;
+	}
+	
+	public void setFosse(LinkedList<Carte> fosse) {
+		this.fosse = fosse;
+	}
+	
 	public static void main(String[] args) {
 		
-		Partie partie = getInstance();
-		
 		introduction();
+		
+		// paramétrage de la partie
 		
 		int choix=0;
 		while (choix!=1 && choix!=2) {
 			System.out.println("Voulez-vous jouer contre l'ordinateur [1] ou contre quelqu'un [2] ?");
 			// A RAJOUTER : demander si le deuxième joueur sera humain ou virtuel
 		}
+		
+		Partie partie;
+		Joueur joueur1;
+		Joueur joueur2;
+		LinkedList<Carte> source = new LinkedList<Carte>();
+		LinkedList<Carte> fosse = new LinkedList<Carte>();
 		
 		if (choix==1) {
 			
@@ -123,27 +141,25 @@ public class Partie {
 				System.out.println("Quel est le nom du premier joueur ?");
 				// A RAJOUTER : demander le nom du joueur 1
 			}
-			Joueur joueurHumain1 = new JoueurHumain(nomJoueur1, partie.source, partie.fosse);
-			partie.setJoueur1(joueurHumain1);
+			joueur1 = new JoueurHumain(nomJoueur1, source, fosse);
 			
 			String nomJoueur2=null;
 			while (nomJoueur2==null) {
 				System.out.println("Quel est le nom du deuxième joueur ?");
 				// A RAJOUTER : demander le nom du joueur 2
 			}
-			Joueur joueurHumain2 = new JoueurHumain(nomJoueur2, partie.source, partie.fosse);
-			partie.setJoueur2(joueurHumain2);
-		}
-		
-		else {
+			joueur2 = new JoueurHumain(nomJoueur2, source, fosse);
+			
+			partie = getInstance((JoueurHumain)joueur1, (JoueurHumain)joueur2, source, fosse);
+			
+		} else {
 			
 			String nomJoueur1=null;
 			while (nomJoueur1==null) {
 				System.out.println("Quel est votre nom ?");
 				// A RAJOUTER : demander le nom du joueur 1
 			}
-			Joueur joueurHumain = new JoueurHumain(nomJoueur1, partie.source, partie.fosse);
-			partie.setJoueur1(joueurHumain);
+			joueur1 = new JoueurHumain(nomJoueur1, source, fosse);
 			
 			choix=0;
 			while (choix!=1 && choix!=2) {
@@ -157,8 +173,9 @@ public class Partie {
 			else {
 				strategie = new StrategieAvance();
 			}
-			Joueur joueurVirtuel = new JoueurVirtuel(strategie, partie.source, partie.fosse);
-			partie.setJoueur2(joueurVirtuel);
+			joueur2 = new JoueurVirtuel(strategie, source, fosse);
+			
+			partie = getInstance((JoueurHumain)joueur1, (JoueurVirtuel)joueur2, source, fosse);
 			
 		}
 		
