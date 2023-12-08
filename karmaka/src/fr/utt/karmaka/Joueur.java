@@ -5,6 +5,7 @@ import java.util.*;
 public abstract class Joueur {
 
 	protected String nom;
+	protected Partie partie;
 	protected boolean aGagne;
 	protected int nbAnneauxKarmiques;
 	protected NiveauKarmique niveauKarmique;
@@ -16,8 +17,9 @@ public abstract class Joueur {
 	protected LinkedList<Carte> source;
 	protected LinkedList<Carte> fosse;
 
-	public Joueur(String nom, LinkedList<Carte> source, LinkedList<Carte> fosse) {
+	public Joueur(String nom, LinkedList<Carte> source, LinkedList<Carte> fosse, Partie partie) {
 		this.nom = nom;
+		this.partie = partie;
 		this.aGagne = false;
 		this.nbAnneauxKarmiques = 0;
 		this.niveauKarmique = NiveauKarmique.BOUSIER;
@@ -97,23 +99,29 @@ public abstract class Joueur {
 	}
 	
 	public void piocher() {
-		Random rand = new Random();
-		int randInt = rand.nextInt(pile.size());
-		Carte carte = pile.get(randInt);
+		Carte carte = pile.getLast();
 		deplacerCarte(carte, pile, main);
 	}
 	
 	public void puiser() {
-		Random rand = new Random();
-		int randInt = rand.nextInt(source.size());
-		Carte carte = pile.get(randInt);
+		if (source.size()==0) {
+			while(fosse.size()>3) {
+				deplacerCarte(fosse.getFirst(),fosse, source);
+			}
+			partie.melangerSource();
+		}
+		Carte carte = source.getLast();
 		deplacerCarte(carte, source, pile);
 	}
 	
 	public void puiser(LinkedList<Carte> emplacementArrivee) {
-		Random rand = new Random();
-		int randInt = rand.nextInt(source.size());
-		Carte carte = pile.get(randInt);
+		if (source.size()==0) {
+			while(fosse.size()>3) {
+				deplacerCarte(fosse.getFirst(),fosse, source);
+			}
+			partie.melangerSource();
+		}
+		Carte carte = source.getLast();
 		deplacerCarte(carte, source, emplacementArrivee);
 	}
 	

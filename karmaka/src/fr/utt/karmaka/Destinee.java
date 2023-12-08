@@ -1,5 +1,7 @@
 package fr.utt.karmaka;
 
+import java.util.*;
+
 public class Destinee extends Carte {
 
 	public Destinee(Partie partie) {
@@ -9,11 +11,28 @@ public class Destinee extends Carte {
 	}
 
 	public void activerCapacite(Joueur joueur) {
+		LinkedList<Carte>source = partie.getSource();
 		// Puisqu'on peut replacer les cartes dans l'ordre souhaité, faire un shuffle au
 		// lieu d'un tirage aléatoire serait peut être mieux
-		joueur.puiser();
-		joueur.puiser();
-		joueur.puiser();
+		Carte carte1 = partie.getSource().getLast();
+		Carte carte2 = partie.getSource().get(partie.getSource().size()-2);
+		Carte carte3 = partie.getSource().get(partie.getSource().size()-3);
+
+		int n = 0;
+		int nbCartesGardees = 0;
+		//Affficher cartes 1, 2 et 3
+		//A RAJOUTER : demander au joueur si il veut déplacer une carte vers sa Vie Future
+		while (n < 3 && nbCartesGardees < 2) {
+			// A RAJOUTER : demander au joueur s'il veut deplacer la carte n dans sa vie future
+			if (choix=="oui") {
+				nbCartesGardees++;
+				Carte carte = partie.getSource().get(partie.getSource().size()-n);
+				joueur.deplacerCarte(carte, partie.getSource(), joueur.main);
+			}
+			n++;
+		}
+		while ()
+		
 
 		int choix1 = 0;
 		while (choix1 != 1 || choix1 != 2) {
