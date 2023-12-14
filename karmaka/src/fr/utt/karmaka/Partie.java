@@ -1,8 +1,11 @@
 package fr.utt.karmaka;
 
+import java.io.*;
 import java.util.*;
 
-public class Partie {
+public class Partie implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private static Partie partie;
 
@@ -127,6 +130,28 @@ public class Partie {
 				"Chaque joueur entame la partie en tant que Bousier avec des cartes en main et sa propre Pile. Lorsque vous êtres à court de cartes, votre vie s'achève et vous vous réincarnez pour une nouvelle vie qui se déroulera, espérons-le, un échelon plus haut sur l'Échelle Karmique. pour ce faire, vous devez cumuler suffisamment de points dans chaque vie, sous peine de devoir la revivre. Toutefois, ne vous attardez pas trop dans une vie, car un rival pourrait bien prendre les devants. Le premier joueur à atteindre la Transcendance gagne !");
 		System.out.println(
 				"Marquez des points, préparez le terrain de votre prochaine vie et si nécessaire, semez des embûches sur le chemin de vos rivaux. Souvenez-vous cependant que l'on récolte ce que l'on sème, et que vos actions auront des conséquences dans cette vie... et dans la suivante.");
+	}
+	
+	public static void sauvegarder() {
+		try (FileOutputStream fos = new FileOutputStream("save.ser")) {
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(partie);
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Partie charger() {
+		Partie partie = null;
+		try (FileInputStream fis = new FileInputStream("save.ser")) {
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			partie = (Partie) ois.readObject();
+			ois.close();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return partie;
 	}
 
 	public Joueur getJoueur1() {
