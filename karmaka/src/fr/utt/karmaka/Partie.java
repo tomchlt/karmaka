@@ -11,31 +11,15 @@ public class Partie {
 	private LinkedList<Carte> source;
 	private LinkedList<Carte> fosse;
 
-	private Partie(JoueurHumain joueur1, JoueurVirtuel joueur2, LinkedList<Carte> source, LinkedList<Carte> fosse) {
+	private Partie(Joueur joueur1, Joueur joueur2, LinkedList<Carte> source, LinkedList<Carte> fosse) {
 		this.joueur1 = joueur1;
 		this.joueur2 = joueur2;
 		this.source = source;
 		this.fosse = fosse;
 	}
-
-	private Partie(JoueurHumain joueur1, JoueurHumain joueur2, LinkedList<Carte> source, LinkedList<Carte> fosse) {
-		this.joueur1 = joueur1;
-		this.joueur2 = joueur2;
-		this.source = source;
-		this.fosse = fosse;
-	}
-
-	public static Partie getInstance(JoueurHumain joueur1, JoueurVirtuel joueur2, LinkedList<Carte> source,
-			LinkedList<Carte> fosse) {
-		if (partie == null) {
-			partie = new Partie(joueur1, joueur2, source, fosse);
-		}
-		return partie;
-	}
-
-	public static Partie getInstance(JoueurHumain joueur1, JoueurHumain joueur2, LinkedList<Carte> source,
-			LinkedList<Carte> fosse) {
-		if (partie == null) {
+	
+	public static Partie getInstance(Joueur joueur1, Joueur joueur2, LinkedList<Carte> source, LinkedList<Carte> fosse) {
+		if (partie==null) {
 			partie = new Partie(joueur1, joueur2, source, fosse);
 		}
 		return partie;
@@ -73,6 +57,7 @@ public class Partie {
 	public Joueur[] designerOrdreJoueurs(Joueur joueur1, Joueur joueur2) {
 		Joueur[] ordre = new Joueur[2];
 		Random rand = new Random();
+		// tirage aléatoire d'un entier >= 0 et < 2 (donc 0 ou 1)
 		int randomInt = rand.nextInt(2);
 		if (randomInt == 0) {
 			ordre[0] = joueur1;
@@ -118,6 +103,10 @@ public class Partie {
 			source.add(new Incarnation(partie));
 		}
 	}
+	
+	public void melangerSource() {
+		Collections.shuffle(source);
+	}
 
 	public void distribuerCartes() {
 		// on distribue 4 cartes à chaque joueur pour constituer leur main de départ
@@ -138,10 +127,6 @@ public class Partie {
 				"Chaque joueur entame la partie en tant que Bousier avec des cartes en main et sa propre Pile. Lorsque vous êtres à court de cartes, votre vie s'achève et vous vous réincarnez pour une nouvelle vie qui se déroulera, espérons-le, un échelon plus haut sur l'Échelle Karmique. pour ce faire, vous devez cumuler suffisamment de points dans chaque vie, sous peine de devoir la revivre. Toutefois, ne vous attardez pas trop dans une vie, car un rival pourrait bien prendre les devants. Le premier joueur à atteindre la Transcendance gagne !");
 		System.out.println(
 				"Marquez des points, préparez le terrain de votre prochaine vie et si nécessaire, semez des embûches sur le chemin de vos rivaux. Souvenez-vous cependant que l'on récolte ce que l'on sème, et que vos actions auront des conséquences dans cette vie... et dans la suivante.");
-	}
-
-	public void melangerSource() {
-		Collections.shuffle(source);
 	}
 
 	public Joueur getJoueur1() {
@@ -210,8 +195,6 @@ public class Partie {
 			}
 			joueur2 = new JoueurHumain(nomJoueur2, source, fosse);
 
-			partie = getInstance((JoueurHumain) joueur1, (JoueurHumain) joueur2, source, fosse);
-
 		} else {
 
 			String nomJoueur1 = null;
@@ -233,11 +216,11 @@ public class Partie {
 				strategie = new StrategieAvance();
 			}
 			joueur2 = new JoueurVirtuel(strategie, source, fosse);
-
-			partie = getInstance((JoueurHumain) joueur1, (JoueurVirtuel) joueur2, source, fosse);
-
+			
 		}
-
+		
+		partie = getInstance(joueur1, joueur2, source, fosse);
+		
 		partie.lancerPartie();
 
 	}
