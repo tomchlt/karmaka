@@ -2,13 +2,14 @@ package fr.utt.karmaka;
 
 public class Main extends Emplacement {
 	
-	public Main() {
+	private Joueur joueur;
+	
+	public Main(Joueur joueur) {
 		super();
 	}
 	
 	public void jouerCartePoints(Carte carte) {
-		Oeuvre oeuvre;
-		deplacerCarteVers(carte, getOeuvre());
+		deplacerCarteVers(carte, joueur.oeuvre);
 	}
 	
 	public void jouerCartePouvoir(Carte carte) {
@@ -16,8 +17,7 @@ public class Main extends Emplacement {
 	}
 	
 	public void jouerCarteFutur(Carte carte) {
-		VieFuture vieFuture;
-		deplacerCarteVers(carte, vieFuture);
+		deplacerCarteVers(carte, joueur.vieFuture);
 	}
 	
 	public static void main(String[] args) {
