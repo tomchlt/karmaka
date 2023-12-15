@@ -33,7 +33,7 @@ public class Emplacement {
 		while(itCartes.hasNext()) {
 			String nom = itCartes.next().getNom();
 			sb.append(nom+ "\n");
-			String description = itCartes.next().getDescriptionCapacite();
+			String description = itCartes.next().getDescription();
 			sb.append(description+ "\n"+"Points :"+ "\n");
 			if (itCartes.next().getPointsBleus()!=0) {
 				int pointsBleus = itCartes.next().getPointsBleus();
