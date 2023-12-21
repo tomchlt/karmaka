@@ -1,6 +1,11 @@
 package fr.utt.karmaka;
 
-public class Deni extends Carte {
+import java.io.Serializable;
+
+public class Deni extends Carte implements Serializable {
+	
+	private static final long serialVersionUID = 666075134350208299L;
+
 	public Deni(Partie partie) {
 		super(0, 0, 2, "Déni", "Défaussez une carte de votre Main. Copiez le pouvoir de cette carte", partie);
 	}

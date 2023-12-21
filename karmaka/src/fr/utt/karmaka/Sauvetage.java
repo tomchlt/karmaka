@@ -1,6 +1,11 @@
 package fr.utt.karmaka;
 
-public class Sauvetage extends Carte {
+import java.io.Serializable;
+
+public class Sauvetage extends Carte implements Serializable {
+	
+	private static final long serialVersionUID = -3683141951588126118L;
+
 	public Sauvetage(Partie partie) {
 		super(0, 2, 0, "Sauvetage", "Ajoutez à votre Main une des 3 dernières cartes de la Fosse.", partie);
 	}

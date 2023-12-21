@@ -1,6 +1,10 @@
 package fr.utt.karmaka;
 
-public class Jubile extends Carte {
+import java.io.Serializable;
+
+public class Jubile extends Carte implements Serializable {
+
+	private static final long serialVersionUID = 6158669912375296624L;
 
 	public Jubile(Partie partie) {
 		super(0, 3, 0, "Jubilé", "Placez 2 cartes de votre Main sur vous Oeuvres", partie);

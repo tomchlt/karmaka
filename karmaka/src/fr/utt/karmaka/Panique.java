@@ -1,6 +1,10 @@
 package fr.utt.karmaka;
 
-public class Panique extends Carte {
+import java.io.Serializable;
+
+public class Panique extends Carte implements Serializable {
+
+	private static final long serialVersionUID = -8968771836437717238L;
 
 	public Panique(Partie partie) {
 		super(1, 0, 0, "Panique", "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.", partie);

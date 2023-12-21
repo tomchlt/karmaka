@@ -1,6 +1,10 @@
 package fr.utt.karmaka;
 
-public class Crise extends Carte{
+import java.io.Serializable;
+
+public class Crise extends Carte implements Serializable {
+
+	private static final long serialVersionUID = -1072719917735251400L;
 
 	public Crise(Partie partie) {
 		super(2, 0, 0, "Crise", "Le rival de votre choix défausse une de ses Oeuvres.", partie);

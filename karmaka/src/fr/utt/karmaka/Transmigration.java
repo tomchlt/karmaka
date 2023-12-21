@@ -1,6 +1,10 @@
 package fr.utt.karmaka;
 
-public class Transmigration extends Carte {
+import java.io.Serializable;
+
+public class Transmigration extends Carte implements Serializable {
+	
+	private static final long serialVersionUID = 5566288548082763988L;
 
 	public Transmigration(Partie partie) {
 		super(0, 0, 1, "Transmigration", "Placez dans votre Main n'importe quelle carte de votre Vie Future", partie);

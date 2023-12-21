@@ -1,6 +1,10 @@
 package fr.utt.karmaka;
 
-public class Voyage extends Carte {
+import java.io.Serializable;
+
+public class Voyage extends Carte implements Serializable {
+	
+	private static final long serialVersionUID = -4211357722298307957L;
 
 	public Voyage(Partie partie) {
 		super(0, 3, 0, "Voyage", "Puisez 3 cartes à la Source. Vous pouvez ensuite jouer une autre carte.", partie);

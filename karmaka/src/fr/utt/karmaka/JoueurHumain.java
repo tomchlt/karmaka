@@ -1,9 +1,12 @@
 package fr.utt.karmaka;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class JoueurHumain extends Joueur {
+public class JoueurHumain extends Joueur implements Serializable {
 	
+	private static final long serialVersionUID = 267935898355358012L;
+
 	public JoueurHumain(String nom, LinkedList<Carte> source, LinkedList<Carte> fosse) {
 		super(nom, source, fosse);
 	}

@@ -1,5 +1,7 @@
 package fr.utt.karmaka;
 
+import java.io.Serializable;
+
 public enum NiveauKarmique {
 	
 	BOUSIER("Bousier", 4),

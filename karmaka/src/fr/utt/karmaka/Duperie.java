@@ -1,8 +1,11 @@
 package fr.utt.karmaka;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Duperie extends Carte {
+public class Duperie extends Carte implements Serializable {
+
+	private static final long serialVersionUID = -8671599952223933535L;
 
 	public Duperie(Partie partie) {
 		super(0, 0, 3, "Duperie", "Regarder 3 cartes de la Main d'un rival; ajoutez en une à votre Main", partie);

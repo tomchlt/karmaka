@@ -1,6 +1,11 @@
 package fr.utt.karmaka;
 
-public class Longevite extends Carte {
+import java.io.Serializable;
+
+public class Longevite extends Carte implements Serializable {
+	
+	private static final long serialVersionUID = -2023161043716899180L;
+
 	public Longevite(Partie partie) {
 		super(0, 2, 0, "Longévité", "Placez 2 cartes puisées à la Source sur la Pile d'un joueur", partie);
 	}

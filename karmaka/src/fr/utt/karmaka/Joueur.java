@@ -1,9 +1,12 @@
 package fr.utt.karmaka;
 
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class Joueur {
+public abstract class Joueur implements Serializable {
 
+	private static final long serialVersionUID = -2427293790425690941L;
+	
 	protected String nom;
 	protected Partie partie;
 	protected boolean aGagne;
@@ -17,9 +20,8 @@ public abstract class Joueur {
 	protected LinkedList<Carte> source;
 	protected LinkedList<Carte> fosse;
 
-	public Joueur(String nom, LinkedList<Carte> source, LinkedList<Carte> fosse, Partie partie) {
+	public Joueur(String nom, LinkedList<Carte> source, LinkedList<Carte> fosse) {
 		this.nom = nom;
-		this.partie = partie;
 		this.aGagne = false;
 		this.nbAnneauxKarmiques = 0;
 		this.niveauKarmique = NiveauKarmique.BOUSIER;
@@ -150,6 +152,10 @@ public abstract class Joueur {
 			total += it.next().getPointsBleus();
 		}
 		return total;
+	}
+	
+	public void setPartie(Partie partie) {
+		this.partie = partie;
 	}
 	
 	public String getNom() {

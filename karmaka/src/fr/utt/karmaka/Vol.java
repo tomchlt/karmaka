@@ -1,6 +1,11 @@
 package fr.utt.karmaka;
 
-public class Vol extends Carte {
+import java.io.Serializable;
+
+public class Vol extends Carte implements Serializable {
+	
+	private static final long serialVersionUID = 983537493789214942L;
+
 	public Vol(Partie partie) {
 		super(0, 0, 3, "Vol", "Placez dans votre Main l'Oeuvre Exposée d'un rival.", partie);
 	}

@@ -1,6 +1,10 @@
 package fr.utt.karmaka;
 
-public abstract class Carte {
+import java.io.Serializable;
+
+public abstract class Carte  implements Serializable{
+	
+	private static final long serialVersionUID = 8571543197401890585L;
 	
 	protected int pointsRouges;
 	protected int pointsVerts;

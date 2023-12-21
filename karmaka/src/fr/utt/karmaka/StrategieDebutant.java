@@ -1,7 +1,11 @@
 package fr.utt.karmaka;
 
-public class StrategieDebutant extends Strategie {
+import java.io.Serializable;
+
+public class StrategieDebutant extends Strategie implements Serializable {
 	
+	private static final long serialVersionUID = 2999330974130263138L;
+
 	public StrategieDebutant() {
 		super();
 	}

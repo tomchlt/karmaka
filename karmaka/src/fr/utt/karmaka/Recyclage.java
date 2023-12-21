@@ -1,6 +1,11 @@
 package fr.utt.karmaka;
 
-public class Recyclage extends Carte {
+import java.io.Serializable;
+
+public class Recyclage extends Carte implements Serializable {
+	
+	private static final long serialVersionUID = 6644982015570858271L;
+
 	public Recyclage(Partie partie) {
 		super(0, 1, 0, "Recyclage", "Ajoutez à votre Vie Future une des 3 dernières cartes de la Fosse.", partie);
 	}

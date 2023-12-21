@@ -1,8 +1,11 @@
 package fr.utt.karmaka;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Destinee extends Carte {
+public class Destinee extends Carte implements Serializable {
+
+	private static final long serialVersionUID = 9162100002008505199L;
 
 	public Destinee(Partie partie) {
 		super(0, 0, 2, "Destinée",

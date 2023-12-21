@@ -1,6 +1,10 @@
 package fr.utt.karmaka;
 
-public class DernierSouffle extends Carte {
+import java.io.Serializable;
+
+public class DernierSouffle extends Carte implements Serializable {
+
+	private static final long serialVersionUID = 5735742941318495225L;
 
 	public DernierSouffle(Partie partie) {
 		super(1, 0, 0, "Dernier Souffle", "Le joueur de votre choix défausse une carte de sa Main.", partie);

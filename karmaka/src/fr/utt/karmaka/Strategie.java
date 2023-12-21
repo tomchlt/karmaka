@@ -1,6 +1,10 @@
 package fr.utt.karmaka;
 
-public abstract class Strategie {
+import java.io.Serializable;
+
+public abstract class Strategie implements Serializable {
+	
+	private static final long serialVersionUID = 1388578098956615836L;
 	
 	private String nomStrategie;
 	private String descriptionStrategie;

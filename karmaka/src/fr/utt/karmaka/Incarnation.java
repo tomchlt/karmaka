@@ -1,6 +1,10 @@
 package fr.utt.karmaka;
 
-public class Incarnation extends Carte {
+import java.io.Serializable;
+
+public class Incarnation extends Carte implements Serializable {
+
+	private static final long serialVersionUID = -6140027867046876427L;
 
 	public Incarnation(Partie partie) {
 		super(1, 1, 1, "Incarnation", "Choisissez une de vos Oeuvres. Copiez son pouvoir.", partie);

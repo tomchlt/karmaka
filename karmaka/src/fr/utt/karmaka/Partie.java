@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Partie implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1753021790410524736L;
 
 	private static Partie partie;
 
@@ -27,19 +27,72 @@ public class Partie implements Serializable {
 		}
 		return partie;
 	}
+	
+	public static Partie creerNouvellePartie() {
+		
+		int choix = 0;
+		while (choix != 1 && choix != 2) {
+			System.out.println("Voulez-vous jouer contre l'ordinateur [1] ou contre quelqu'un [2] ?");
+			// A RAJOUTER : demander si le deuxième joueur sera humain ou virtuel
+		}
 
-	public void lancerPartie() {
+		Partie partie;
+		Joueur joueur1;
+		Joueur joueur2;
+		LinkedList<Carte> source = new LinkedList<Carte>();
+		LinkedList<Carte> fosse = new LinkedList<Carte>();
 
-		creerCartes();
+		if (choix == 1) {
 
-		melangerSource();
+			String nomJoueur1 = null;
+			while (nomJoueur1 == null) {
+				System.out.println("Quel est le nom du premier joueur ?");
+				// A RAJOUTER : demander le nom du joueur 1
+			}
+			joueur1 = new JoueurHumain(nomJoueur1, source, fosse);
 
-		distribuerCartes();
+			String nomJoueur2 = null;
+			while (nomJoueur2 == null) {
+				System.out.println("Quel est le nom du deuxième joueur ?");
+				// A RAJOUTER : demander le nom du joueur 2
+			}
+			joueur2 = new JoueurHumain(nomJoueur2, source, fosse);
 
-		Joueur[] ordre = designerOrdreJoueurs(joueur1, joueur2);
-		setJoueur1(ordre[0]);
-		setJoueur2(ordre[1]);
+		} else {
 
+			String nomJoueur1 = null;
+			while (nomJoueur1 == null) {
+				System.out.println("Quel est votre nom ?");
+				// A RAJOUTER : demander le nom du joueur 1
+			}
+			joueur1 = new JoueurHumain(nomJoueur1, source, fosse);
+
+			choix = 0;
+			while (choix != 1 && choix != 2) {
+				System.out.println("Choisissez le niveau de l'ordinateur : Débutant [1] ou Avancé [2]");
+				// A RAJOUTER : demander le niveau du joueur virtuel
+			}
+			Strategie strategie;
+			if (choix == 1) {
+				strategie = new StrategieDebutant();
+			} else {
+				strategie = new StrategieAvance();
+			}
+			joueur2 = new JoueurVirtuel(strategie, source, fosse);
+			
+		}
+		
+		partie = getInstance(joueur1, joueur2, source, fosse);
+		
+		joueur1.setPartie(partie);
+		joueur2.setPartie(partie);
+		
+		partie.initialiserPartie();
+		
+		return partie;
+	}
+
+	public void jouer() {
 		System.out.println("La partie commence !");
 		while (joueur1.getAGagne() == false && joueur2.getAGagne() == false) {
 			// le joueur 1 joue son tour
@@ -48,6 +101,7 @@ public class Partie implements Serializable {
 			if (joueur1.getAGagne() == false) {
 				joueur2.tour();
 			}
+			sauvegarderPartie();
 		}
 		if (joueur1.getAGagne() == true) {
 			System.out.println(joueur1.getNom() + " a gagné !");
@@ -70,6 +124,15 @@ public class Partie implements Serializable {
 			ordre[1] = joueur1;
 		}
 		return ordre;
+	}
+	
+	public void initialiserPartie() {
+		creerCartes();
+		melangerSource();
+		distribuerCartes();
+		Joueur[] ordre = designerOrdreJoueurs(joueur1, joueur2);
+		setJoueur1(ordre[0]);
+		setJoueur2(ordre[1]);
 	}
 
 	public void creerCartes() {
@@ -132,22 +195,18 @@ public class Partie implements Serializable {
 				"Marquez des points, préparez le terrain de votre prochaine vie et si nécessaire, semez des embûches sur le chemin de vos rivaux. Souvenez-vous cependant que l'on récolte ce que l'on sème, et que vos actions auront des conséquences dans cette vie... et dans la suivante.");
 	}
 	
-	public static void sauvegarder() {
-		try (FileOutputStream fos = new FileOutputStream("save.ser")) {
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
+	public static void sauvegarderPartie() {
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("save.ser"))) {
 			oos.writeObject(partie);
-			oos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static Partie charger() {
+	public static Partie chargerPartie() {
 		Partie partie = null;
-		try (FileInputStream fis = new FileInputStream("save.ser")) {
-			ObjectInputStream ois = new ObjectInputStream(fis);
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("save.ser"))) {
 			partie = (Partie) ois.readObject();
-			ois.close();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -189,64 +248,19 @@ public class Partie implements Serializable {
 	public static void main(String[] args) {
 
 		introduction();
-
-		// paramétrage de la partie
-
-		int choix = 0;
-		while (choix != 1 && choix != 2) {
-			System.out.println("Voulez-vous jouer contre l'ordinateur [1] ou contre quelqu'un [2] ?");
-			// A RAJOUTER : demander si le deuxième joueur sera humain ou virtuel
-		}
-
-		Partie partie;
-		Joueur joueur1;
-		Joueur joueur2;
-		LinkedList<Carte> source = new LinkedList<Carte>();
-		LinkedList<Carte> fosse = new LinkedList<Carte>();
-
+		
+		File f = new File("save.ser");
+		if (f.exists()) {;
+			// A RAJOUTER : demander si on veut continuer la partie précédente [1] ou en créer une nouvelle [2]
+		int choix = 1;
 		if (choix == 1) {
-
-			String nomJoueur1 = null;
-			while (nomJoueur1 == null) {
-				System.out.println("Quel est le nom du premier joueur ?");
-				// A RAJOUTER : demander le nom du joueur 1
+				Partie partie = chargerPartie();	
 			}
-			joueur1 = new JoueurHumain(nomJoueur1, source, fosse);
-
-			String nomJoueur2 = null;
-			while (nomJoueur2 == null) {
-				System.out.println("Quel est le nom du deuxième joueur ?");
-				// A RAJOUTER : demander le nom du joueur 2
-			}
-			joueur2 = new JoueurHumain(nomJoueur2, source, fosse);
-
 		} else {
-
-			String nomJoueur1 = null;
-			while (nomJoueur1 == null) {
-				System.out.println("Quel est votre nom ?");
-				// A RAJOUTER : demander le nom du joueur 1
-			}
-			joueur1 = new JoueurHumain(nomJoueur1, source, fosse);
-
-			choix = 0;
-			while (choix != 1 && choix != 2) {
-				System.out.println("Choisissez le niveau de l'ordinateur : Débutant [1] ou Avancé [2]");
-				// A RAJOUTER : demander le niveau du joueur virtuel
-			}
-			Strategie strategie;
-			if (choix == 1) {
-				strategie = new StrategieDebutant();
-			} else {
-				strategie = new StrategieAvance();
-			}
-			joueur2 = new JoueurVirtuel(strategie, source, fosse);
-			
+			Partie partie = creerNouvellePartie();
 		}
 		
-		partie = getInstance(joueur1, joueur2, source, fosse);
-		
-		partie.lancerPartie();
+		partie.jouer();
 
 	}
 
