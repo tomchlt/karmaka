@@ -3,9 +3,9 @@ package cartes;
 import java.io.Serializable;
 import java.util.*;
 
-import fr.utt.karmaka.Carte;
-import fr.utt.karmaka.Joueur;
-import fr.utt.karmaka.Partie;
+import karmaka.Carte;
+import karmaka.Joueur;
+import karmaka.Partie;
 
 public class Destinee extends Carte implements Serializable {
 

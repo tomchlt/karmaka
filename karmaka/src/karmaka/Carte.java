@@ -2,7 +2,7 @@ package karmaka;
 
 import java.io.Serializable;
 
-public abstract class Carte  implements Serializable{
+public abstract class Carte  implements Serializable {
 	
 	private static final long serialVersionUID = 8571543197401890585L;
 	
@@ -22,6 +22,28 @@ public abstract class Carte  implements Serializable{
 		this.partie = partie;
 	}
 	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("Nom : ");
+		sb.append(nom + "\t");
+		if ( (pointsRouges == pointsVerts) && (pointsVerts == pointsBleus) ) {
+			sb.append("Type : Mosaïque \t");
+			sb.append(pointsRouges + "\t");
+		} else if (pointsRouges > 0) {
+			sb.append("Type : Rouge \t");
+			sb.append(pointsRouges + "\t");
+		} else if (pointsVerts > 0) {
+			sb.append("Type : Vert \t");
+			sb.append(pointsVerts + "\t");
+		} else if (pointsBleus > 0) {
+			sb.append("Type : Bleu \t");
+			sb.append(pointsBleus + "\t");
+		}
+		sb.append("Capacité : ");
+		sb.append(description + "\n");
+		return sb.toString();
+	}
+	
 	public void activerCapacite() {}
 	
 	public Joueur determinerJoueurAdverse(Joueur joueur) {
@@ -35,10 +57,6 @@ public abstract class Carte  implements Serializable{
 			System.out.println("Erreur : le joueur adverse n'a pas pu être trouvé");
 		}
 		return joueurAdverse;
-	}
-	
-	public static void main(String[] args) {
-		
 	}
 	
 	public int getPointsRouges() {
@@ -87,6 +105,10 @@ public abstract class Carte  implements Serializable{
 	
 	public void setPartie(Partie partie) {
 		this.partie = partie;
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 
 }

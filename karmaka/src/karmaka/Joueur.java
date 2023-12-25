@@ -7,6 +7,7 @@ public abstract class Joueur implements Serializable {
 
 	private static final long serialVersionUID = -2427293790425690941L;
 	
+	protected static Console console = Partie.getConsole();
 	protected String nom;
 	protected Partie partie;
 	protected boolean aGagne;
@@ -36,56 +37,9 @@ public abstract class Joueur implements Serializable {
 	
 	public void tour() {}
 	
-	public void seReincarner() {
-		System.out.println("Vous tentez de vous réincarner...");
-		int pointsMax;
-		pointsMax = Math.max(calculerPointsRouges(), calculerPointsVerts());
-		pointsMax = Math.max(pointsMax, calculerPointsBleus());
-		if (pointsMax + nbAnneauxKarmiques >= niveauKarmique.getPointsRequis()) {
-			if (pointsMax < niveauKarmique.getPointsRequis()) {
-				nbAnneauxKarmiques -= (niveauKarmique.getPointsRequis() - pointsMax);
-			}
-			switch (niveauKarmique) {
-			case BOUSIER:
-				niveauKarmique = NiveauKarmique.SERPENT;
-				System.out.println("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
-				break;
-			case SERPENT:
-				niveauKarmique = NiveauKarmique.LOUP;
-				System.out.println("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
-				break;
-			case LOUP:
-				niveauKarmique = NiveauKarmique.SINGE;
-				System.out.println("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
-				break;
-			case SINGE:
-				aGagne = true;
-				System.out.println("Vous accédez à la Transcendance !");
-				break;
-			default:
-				System.out.println("Erreur dans l'augmentation du niveau karmique");
-				break;
-			}
-		} else {
-			nbAnneauxKarmiques += 1;
-			System.out.println("Votre réincarnation a échoué, vous recevez 1 anneau karmique.");
-		}
-	}
+	public void seReincarner() {}
 
-	public void jouer() {
-		String choix = null;
-		while (choix != "points" || choix != "pouvoir" || choix != "futur") {
-			// A RAJOUTER : demander au joueur quelle carte il veut jouer et comment il veut
-			// la jouer
-		}
-		if (choix == "points") {
-			deplacerCarte(carte, main, oeuvre);
-		} else if (choix == "pouvoir") {
-			carte.activerCapacite(this);
-		} else if (choix == "futur") {
-			deplacerCarte(carte, main, vieFuture);
-		}
-	}
+	public void jouer() {}
 	
 	public void deplacerCarte(Carte carte, LinkedList<Carte> empacementDepart, LinkedList<Carte> emplacementArrivee) {
 		emplacementArrivee.add(carte);
