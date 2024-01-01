@@ -59,6 +59,13 @@ public abstract class Carte  implements Serializable {
 		}
 		return joueurAdverse;
 	}
+	public int getPoints() {
+		int points = pointsRouges+pointsVerts+pointsBleus;
+		if(getNom()=="Incarnation"||getNom()=="Mimétisme")
+			points =1;
+		return points;
+	}
+	
 	
 	public int getPointsRouges() {
 		return pointsRouges;
