@@ -1,6 +1,7 @@
 package karmaka;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 
 public abstract class Strategie implements Serializable {
 	
@@ -17,5 +18,13 @@ public abstract class Strategie implements Serializable {
 	public static void main(String[] args) {
 		
 	}
+	
+	public abstract int choisirCarte(JoueurVirtuel joueurV);
+	
+	public abstract int jouerCarte(JoueurVirtuel joueurV);
+	
+	public abstract int garderCarte();
+	
+	public abstract int passerTour();
 
 }

@@ -19,8 +19,6 @@ public class Destinee extends Carte implements Serializable {
 
 	public void activerCapacite(Joueur joueur) {
 		LinkedList<Carte>source = partie.getSource();
-		// Puisqu'on peut replacer les cartes dans l'ordre souhaité, faire un shuffle au
-		// lieu d'un tirage aléatoire serait peut être mieux
 		Carte carte1 = partie.getSource().getLast();
 		Carte carte2 = partie.getSource().get(partie.getSource().size()-2);
 		Carte carte3 = partie.getSource().get(partie.getSource().size()-3);
@@ -34,12 +32,14 @@ public class Destinee extends Carte implements Serializable {
 			if (choix=="oui") {
 				nbCartesGardees++;
 				Carte carte = partie.getSource().get(partie.getSource().size()-n);
-				joueur.deplacerCarte(carte, partie.getSource(), joueur.main);
+				joueur.deplacerCarte(carte, partie.getSource(), joueur.getMain());
 			}
 			n++;
+			if (n==3) {
+				n=0;
+				//On peut faire en sorte que le joueur puisse revisionner les cartes autant qu'il veut
+			}
 		}
-		while ()
-		
 
 		int choix1 = 0;
 		while (choix1 != 1 || choix1 != 2) {
@@ -54,14 +54,14 @@ public class Destinee extends Carte implements Serializable {
 				// joueur.main.get(joueur.main.size() - 3
 			}
 			if (choix2 == 1) {
-				joueur.deplacerCarte(joueur.main.get(joueur.main.size() - 1), joueur.main, joueur.source);
-				joueur.deplacerCarte(joueur.main.get(joueur.main.size() - 2), joueur.main, joueur.source);
+				joueur.deplacerCarte(joueur.getMain().get(joueur.getMain().size() - 1), joueur.getMain(), joueur.getSource());
+				joueur.deplacerCarte(joueur.getMain().get(joueur.getMain().size() - 2), joueur.getMain(), joueur.getSource());
 			} else if (choix2 == 2) {
-				joueur.deplacerCarte(joueur.main.get(joueur.main.size() - 1), joueur.main, joueur.source);
-				joueur.deplacerCarte(joueur.main.get(joueur.main.size() - 3), joueur.main, joueur.source);
+				joueur.deplacerCarte(joueur.getMain().get(joueur.getMain().size() - 1), joueur.getMain(), joueur.getSource());
+				joueur.deplacerCarte(joueur.getMain().get(joueur.getMain().size() - 3), joueur.getMain(), joueur.getSource());
 			} else if (choix2 == 3) {
-				joueur.deplacerCarte(joueur.main.get(joueur.main.size() - 2), joueur.main, joueur.source);
-				joueur.deplacerCarte(joueur.main.get(joueur.main.size() - 3), joueur.main, joueur.source);
+				joueur.deplacerCarte(joueur.getMain().get(joueur.getMain().size() - 2), joueur.getMain(), joueur.getSource());
+				joueur.deplacerCarte(joueur.getMain().get(joueur.getMain().size() - 3), joueur.getMain(), joueur.getSource());
 			}
 			// Le fait de déplacer des cartes comme cela ne risque pas de trigger l'observer
 			// à cahque fois ?
@@ -76,11 +76,11 @@ public class Destinee extends Carte implements Serializable {
 				// joueur.main.get(joueur.main.size() - 3
 			}
 			if (choix2 == "1 et 2") {
-				joueur.deplacerCarte(joueur.main.get(joueur.main.size() - 1), joueur.main, joueur.source);
+				joueur.deplacerCarte(joueur.getMain().get(joueur.getMain().size() - 1), joueur.getMain(), joueur.getSource());
 			} else if (choix2 == "1 et 3") {
-				joueur.deplacerCarte(joueur.main.get(joueur.main.size() - 2), joueur.main, joueur.source);
+				joueur.deplacerCarte(joueur.getMain().get(joueur.getMain().size() - 2), joueur.getMain(), joueur.getSource());
 			} else if (choix2 == "2 et 3") {
-				joueur.deplacerCarte(joueur.main.get(joueur.main.size() - 3), joueur.main, joueur.source);
+				joueur.deplacerCarte(joueur.getMain().get(joueur.getMain().size() - 3), joueur.getMain(), joueur.getSource());
 			}
 		}
 	}

@@ -6,7 +6,7 @@ import java.util.*;
 public class JoueurVirtuel extends Joueur implements Serializable {
 
 	private static final long serialVersionUID = 7136102809375697698L;
-	
+
 	private Strategie strategie;
 
 	public JoueurVirtuel(Strategie strategie, LinkedList<Carte> source, LinkedList<Carte> fosse) {
@@ -15,74 +15,56 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 	}
 
 	public void tour() {
-		
+
 		// on vérifie si l'adversaire a transmis une carte au joueur
-		if (tempo.size()>0) {
-			console.afficher("L'adversaire vous a transmis " + tempo.size() + " cartes durant son tour.");
+		if (tempo.size() > 0) {
 			Iterator<Carte> it = tempo.iterator();
 			int numCarte = 1;
 			while (it.hasNext()) {
 				Carte carte = it.next();
-				console.afficher("Carte [" + numCarte + "] : \n");
-				console.afficher(carte);
 				int choix = 0;
-				while (choix!=1 && choix!=2) {
-					console.afficher("Voulez-vous défausser cette carte ou la mettre dans votre main ?");
-					choix = console.lireInt();
-				}
-				if (choix==1) {
+				choix = strategie.garderCarte();
+				if (choix == 1) {
 					deplacerCarte(carte, tempo, main);
-				}
-				else {
+				} else {
 					defausser(carte, tempo);
 				}
-				numCarte ++;
 			}
 		}
-		
+
 		// on vérifie si le joueur doit se réincarner
-		if (pile.size()==0 && main.size()==0) {
+		if (pile.size() == 0 && main.size() == 0) {
 			seReincarner();
 		}
-		
+
 		// si le joueur ne se réincarne pas, il joue
 		else {
-			
+
 			// si la pile du joueur n'est pas vide, il y pioche une carte
-			if (pile.size()>0) {
+			if (pile.size() > 0) {
 				piocher();
+			} else {
+				System.out.println("l'adversaire ne peut pas piocher. (sa pile est vide)");
 			}
-			else {
-				System.out.println("Vous ne pouvez pas piocher. (votre pile est vide)");
-			}
-			
-			// on affiche les informations nécessaires pour la prise de décision au joueur
-			console.afficher("Vous avez " + pile.size() + " carte(s) dans votre Pile, et " + vieFuture.size() + " carte(s) dans votre Vie Future.");
-			console.afficher("Voici les cartes dans vos Oeuvres : \n");
-			afficherCartes(oeuvre);
-			console.afficher("Voici les cartes dans votre Main : \n");
-			afficherCartes(main);
-			
+
 			// si le joueur peut passer, on lui demande s'il veut passer
 			int choix = 0;
-			if (pile.size()>0) {
-				while (choix!=1 && choix!=2) {
-					console.afficher("Voulez-vous passer votre tour ? (Entrez [1] pour passer, [2] pour jouer)");
-					choix = console.lireInt();
-				}
+			if (pile.size() > 0) {
+				choix = strategie.passerTour();
 			}
-			
-			// si le joueur ne peut pas passer ou qu'il ne veut pas passer, il joue une carte
-			if (pile.size()==0 || choix==2) {
+
+			// si le joueur ne peut pas passer ou qu'il ne veut pas passer, il joue une
+			// carte
+			if (pile.size() == 0 || choix == 2) {
 				jouer();
 			}
-			
+
 		}
-		
+
 	}
-	
+
 	public void seReincarner() {
-		console.afficher("Vous tentez de vous réincarner...");
+		console.afficher("Le joueur adverse tente de se réincarner...");
 		int pointsMax;
 		pointsMax = Math.max(calculerPointsRouges(), calculerPointsVerts());
 		pointsMax = Math.max(pointsMax, calculerPointsBleus());
@@ -93,19 +75,19 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 			switch (niveauKarmique) {
 			case BOUSIER:
 				niveauKarmique = NiveauKarmique.SERPENT;
-				console.afficher("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
+				console.afficher("Il se réincarne en " + niveauKarmique.getNomNiveau() + " !");
 				break;
 			case SERPENT:
 				niveauKarmique = NiveauKarmique.LOUP;
-				console.afficher("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
+				console.afficher("Il se réincarne en " + niveauKarmique.getNomNiveau() + " !");
 				break;
 			case LOUP:
 				niveauKarmique = NiveauKarmique.SINGE;
-				console.afficher("Vous vous réincarnez en " + niveauKarmique.getNomNiveau() + " !");
+				console.afficher("Il se réincarne en " + niveauKarmique.getNomNiveau() + " !");
 				break;
 			case SINGE:
 				aGagne = true;
-				console.afficher("Vous accédez à la Transcendance !");
+				console.afficher("Il accéde à la Transcendance !");
 				break;
 			default:
 				console.afficher("Erreur dans l'augmentation du niveau karmique");
@@ -113,31 +95,26 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 			}
 		} else {
 			nbAnneauxKarmiques += 1;
-			console.afficher("Votre réincarnation a échoué, mais vous recevez 1 anneau karmique.");
+			console.afficher("Sa réincarnation a échoué, mais il reçoit 1 anneau karmique.");
 		}
 	}
 
 	public void jouer() {
-		int choixCarte = 0;
-		while (choixCarte == 0 || choixCarte > main.size()) {
-			console.afficher("Quelle carte voulez-vous jouer ? (Entrez le numéro de la carte)");
-			choixCarte = console.lireInt();
-		}
+		int choixCarte = strategie.choisirCarte(this);
 		Carte carteChoisie = main.get(choixCarte);
-		int choix = 0;
-		while (choix != 1 && choix != 2 && choix != 3) {
-			console.afficher("Voulez-vous jouer cette carte pour ses points [1], son pouvoir [2], ou votre Vie Future [3] ?");
-			choix = console.lireInt();
-		}
+		int choix = strategie.jouerCarte();
 		if (choix == 1) {
 			deplacerCarte(carteChoisie, main, oeuvre);
+			console.afficher("Le joueur adverse place dans ses oeuvres la carte " + carteChoisie.toString());
 		} else if (choix == 2) {
 			carteChoisie.activerCapacite();
+			console.afficher("Le joueur adverse joue pour ses pouvoirs la carte " + carteChoisie.toString());
 		} else if (choix == 3) {
 			deplacerCarte(carteChoisie, main, vieFuture);
+			console.afficher("Le joueur adverse place une carte dans sa Vie Future");
 		}
 	}
-	
+
 	public void afficherCartes(LinkedList<Carte> emplacement) {
 		Iterator<Carte> it = emplacement.iterator();
 		while (it.hasNext()) {
@@ -149,4 +126,11 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 
 	}
 
+	public Strategie getStrategie() {
+		return strategie;
+	}
+
+	public void setStrategie(Strategie strategie) {
+		this.strategie = strategie;
+	}
 }
