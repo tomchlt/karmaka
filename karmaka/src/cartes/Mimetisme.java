@@ -15,8 +15,11 @@ public class Mimetisme extends Carte implements Serializable {
 	}
 	
 	public void activerCapacite(Joueur joueur) {
+		
+		// Le pouvoir de l'oeuvre exposée du joueur adverse est copié
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
 		joueurAdverse.getOeuvre().getLast().activerCapacite();
+		
 	}
 
 }

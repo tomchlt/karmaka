@@ -15,10 +15,13 @@ public class Fournaise extends Carte implements Serializable {
 	}
 	
 	public void activerCapactite(Joueur joueur) {
+		
+		// Le joueur adverse défausse les 2 premières cartes de sa vie future
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
 		for (int i=0;i<2;i++) {
-			joueurAdverse.defausser(joueurAdverse.getVieFuture().getFirst(), joueurAdverse.getVieFuture());
+			joueurAdverse.defausser(joueurAdverse.getVieFuture().getLast(), joueurAdverse.getVieFuture());
 		}
+		
 	}
 
 }

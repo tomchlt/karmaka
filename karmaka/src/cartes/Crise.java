@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import karmaka.Carte;
 import karmaka.Joueur;
+import karmaka.JoueurHumain;
+import karmaka.JoueurVirtuel;
 import karmaka.Partie;
 
 public class Crise extends Carte implements Serializable {
@@ -15,9 +17,24 @@ public class Crise extends Carte implements Serializable {
 	}
 	
 	public void activerCapacite(Joueur joueur) {
+		
+		// Le joueur adverse choisit quelle carte de ses oeuvres il préfère défausser
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
-		// A RAJOUTER : demander au joueur adverse quelle carte de ses oeuvres il préfère défausser
-		joueurAdverse.defausser(carte, joueurAdverse.getOeuvre());
+		int choixCarte = -1;
+		if (joueurAdverse instanceof JoueurHumain) {
+			console.afficher("**********************************************************************");
+			console.afficher("Choix pour le joueur adverse (" + joueurAdverse.getNom() + ") :");
+			while (choixCarte<0 || choixCarte>=joueurAdverse.getOeuvre().size()) {
+				console.afficher("Quelle carte de vos Oeuvres préférez-vous défausser ? (Entrez le numéro de la carte)");
+				choixCarte = console.lireInt();
+			}
+			console.afficher("**********************************************************************");
+		} else if (joueurAdverse instanceof JoueurVirtuel) {
+			// A RAJOUTER
+		}
+		Carte carteChoisie = joueurAdverse.getOeuvre().get(choixCarte);
+		joueurAdverse.defausser(carteChoisie, joueurAdverse.getOeuvre());
+		
 	}
 
 }

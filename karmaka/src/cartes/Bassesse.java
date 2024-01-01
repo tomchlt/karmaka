@@ -17,13 +17,16 @@ public class Bassesse extends Carte implements Serializable {
 	}
 	
 	public void activerCapacite(Joueur joueur) {
+		
+		// Le joueur adverse défausse 2 cartes au hasard de sa main
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
 		for (int i=0;i<2;i++) {
 			Random rand = new Random();
-			int randInt = rand.nextInt(joueurAdverse.main.size());
-			Carte carte = joueurAdverse.main.get(randInt);
+			int randInt = rand.nextInt(joueurAdverse.getMain().size());
+			Carte carte = joueurAdverse.getMain().get(randInt);
 			joueurAdverse.defausser(carte, joueurAdverse.getMain());
 		}
+		
 	}
 
 }

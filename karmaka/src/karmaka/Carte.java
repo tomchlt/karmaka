@@ -6,6 +6,7 @@ public abstract class Carte  implements Serializable {
 	
 	private static final long serialVersionUID = 8571543197401890585L;
 	
+	protected static Console console = Partie.getConsole();
 	protected int pointsRouges;
 	protected int pointsVerts;
 	protected int pointsBleus;

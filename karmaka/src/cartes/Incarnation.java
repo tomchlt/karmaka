@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import karmaka.Carte;
 import karmaka.Joueur;
+import karmaka.JoueurHumain;
+import karmaka.JoueurVirtuel;
 import karmaka.Partie;
 
 public class Incarnation extends Carte implements Serializable {
@@ -15,8 +17,20 @@ public class Incarnation extends Carte implements Serializable {
 	}
 	
 	public void activerCapacite(Joueur joueur) {
-		// A RAJOUTER : demander au joueur de quelle carte parmi ses oeuvres il veut copier le pouvoir
-		carte.activerCapacite();
+		
+		// Le joueur choisit une carte de ses oeuvres dont il veut copier le pouvoir
+		int choixCarte = -1;
+		if (joueur instanceof JoueurHumain) {
+			while (choixCarte<0 || choixCarte>=joueur.getOeuvre().size()) {
+				console.afficher("De quelle carte voulez-vous copier le pouvoir ? (Entrez le numéro de cette carte)");
+				choixCarte = console.lireInt();
+			}
+		} else if (joueur instanceof JoueurVirtuel) {
+			// A RAJOUTER
+		}
+		Carte carteChoisie = joueur.getOeuvre().get(choixCarte);
+		carteChoisie.activerCapacite();
+		
 	}
 
 }

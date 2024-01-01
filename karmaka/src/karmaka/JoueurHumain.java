@@ -64,13 +64,13 @@ public class JoueurHumain extends Joueur implements Serializable {
 			int choix = 0;
 			if (pile.size()>0) {
 				while (choix!=1 && choix!=2) {
-					console.afficher("Voulez-vous passer votre tour ? (Entrez [1] pour passer, [2] pour jouer)");
+					console.afficher("Voulez-vous jouer [1] ou passer votre tour [2] ?");
 					choix = console.lireInt();
 				}
 			}
 			
 			// si le joueur ne peut pas passer ou qu'il ne veut pas passer, il joue une carte
-			if (pile.size()==0 || choix==2) {
+			if (pile.size()==0 || choix==1) {
 				jouer();
 			}
 			
@@ -115,23 +115,27 @@ public class JoueurHumain extends Joueur implements Serializable {
 	}
 
 	public void jouer() {
-		int choixCarte = 0;
-		while (choixCarte == 0 || choixCarte > main.size()) {
+		int choixCarte = -1;
+		while (choixCarte < 0 || choixCarte >= main.size()) {
 			console.afficher("Quelle carte voulez-vous jouer ? (Entrez le numéro de la carte)");
 			choixCarte = console.lireInt();
 		}
 		Carte carteChoisie = main.get(choixCarte);
 		int choix = 0;
 		while (choix != 1 && choix != 2 && choix != 3) {
-			console.afficher("Voulez-vous jouer cette carte pour ses points [1], son pouvoir [2], ou votre Vie Future [3] ?");
+			console.afficher("Voulez-vous jouer cette carte pour ses points [1], son pouvoir [2], ou votre Vie Future [3]?");
 			choix = console.lireInt();
 		}
-		if (choix == 1) {
-			deplacerCarte(carteChoisie, main, oeuvre);
-		} else if (choix == 2) {
-			carteChoisie.activerCapacite();
-		} else if (choix == 3) {
-			deplacerCarte(carteChoisie, main, vieFuture);
+		switch (choix) {
+			case 1:
+				deplacerCarte(carteChoisie, main, oeuvre);
+				break;
+			case 2:
+				carteChoisie.activerCapacite();
+				break;
+			case 3:
+				deplacerCarte(carteChoisie, main, vieFuture);
+				break;
 		}
 	}
 	

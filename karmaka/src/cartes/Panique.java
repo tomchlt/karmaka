@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import karmaka.Carte;
 import karmaka.Joueur;
+import karmaka.JoueurHumain;
+import karmaka.JoueurVirtuel;
 import karmaka.Partie;
 
 public class Panique extends Carte implements Serializable {
@@ -15,11 +17,52 @@ public class Panique extends Carte implements Serializable {
 	}
 	
 	public void activerCapacite(Joueur joueur) {
+		
+		// Le joueur adverse défausse la première carte de sa pile
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
-		joueurAdverse.defausser(joueurAdverse.pile.getFirst(), joueur.pile);
-		System.out.println("Vous pouvez maintenant jouer une autre carte.");
-		// A RAJOUTER : demander au joueur quelle carte il veut maintenant jouer
-		carte.activerCapacite();
+		joueurAdverse.defausser(joueurAdverse.getPile().getLast(), joueurAdverse.getPile());
+		
+		// Le joueur choisit de jouer une autre carte ou non
+		int choixJouer = 0;
+		if (joueur instanceof JoueurHumain) {
+			while (choixJouer!=1 && choixJouer!=2) {
+				console.afficher("Voulez-vous jouer une autre carte ? (Entrez [1] pour OUI, [2] pour NON)");
+				choixJouer = console.lireInt();
+			}
+		} else if (joueur instanceof JoueurVirtuel) {
+			// A RAJOUTER
+		}
+		
+		// Si le joueur a choisi de jouer une autre carte, il choisit quelle carte jouer et comment la jouer
+		if (choixJouer==1) {
+			int choixCarte = -1;
+			int choix = 0;
+			if (joueur instanceof JoueurHumain) {
+				while (choixCarte<0 || choixCarte>=joueur.getMain().size()) {
+					console.afficher("Quelle carte voulez-vous maintenant jouer ? (Entrez le numéro de la carte)");
+					choixCarte = console.lireInt();
+				}
+				while (choix!=1 && choix!=2 && choix!=3) {
+					console.afficher("Voulez-vous jouer cette carte pour ses points [1], son pouvoir [2], ou votre Vie Future [3]?");
+					choix = console.lireInt();
+				}
+			} else if (joueur instanceof JoueurVirtuel) {
+				// A RAJOUTER
+			}
+			Carte carteChoisie = joueur.getMain().get(choixCarte);
+			switch (choix) {
+			case 1:
+				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getOeuvre());
+				break;
+			case 2:
+				carteChoisie.activerCapacite();
+				break;
+			case 3:
+				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getVieFuture());
+				break;
+			}
+		}
+		
 	}
 
 }

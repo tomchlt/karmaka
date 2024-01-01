@@ -15,8 +15,11 @@ public class Vengeance extends Carte implements Serializable {
 	}
 	
 	public void activerCapacite(Joueur joueur) {
+		
+		// Le joueur adverse défausse son oeuvre exposée
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
 		joueurAdverse.defausser(joueurAdverse.getOeuvre().getLast(), joueurAdverse.getOeuvre());
+		
 	}
 
 }
