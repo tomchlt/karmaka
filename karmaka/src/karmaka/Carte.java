@@ -45,7 +45,7 @@ public abstract class Carte  implements Serializable {
 		return sb.toString();
 	}
 	
-	public void activerCapacite() {}
+	public void activerCapacite(Joueur joueur) {}
 	
 	public Joueur determinerJoueurAdverse(Joueur joueur) {
 		Joueur joueurAdverse;

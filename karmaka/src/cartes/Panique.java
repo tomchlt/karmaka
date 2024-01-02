@@ -20,17 +20,34 @@ public class Panique extends Carte implements Serializable {
 		
 		// Le joueur adverse défausse la première carte de sa pile
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
-		joueurAdverse.defausser(joueurAdverse.getPile().getLast(), joueurAdverse.getPile());
+		if (joueurAdverse.getPile().isEmpty()==false) {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Vous faites défausser la première carte de sa Pile à votre adversaire.");
+			}
+			joueurAdverse.defausser(joueurAdverse.getPile().getLast(), joueurAdverse.getPile());
+		} else {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Votre adversaire n'a aucune carte dans sa Pile...");
+			}
+		}
 		
 		// Le joueur choisit de jouer une autre carte ou non
 		int choixJouer = 0;
-		if (joueur instanceof JoueurHumain) {
-			while (choixJouer!=1 && choixJouer!=2) {
-				console.afficher("Voulez-vous jouer une autre carte ? (Entrez [1] pour OUI, [2] pour NON)");
-				choixJouer = console.lireInt();
+		if (joueur.getMain().isEmpty()==false) {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Cartes dans votre Main :");
+				((JoueurHumain) joueur).afficherCartes(joueur.getMain());
+				while (choixJouer!=1 && choixJouer!=2) {
+					console.afficher("Voulez-vous jouer une autre carte ? (Entrez [1] pour OUI, [2] pour NON)");
+					choixJouer = console.lireInt();
+				}
+			} else if (joueur instanceof JoueurVirtuel) {
+				// A RAJOUTER
 			}
-		} else if (joueur instanceof JoueurVirtuel) {
-			// A RAJOUTER
+		} else {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Vous n'avez plus de cartes dans votre Main...");
+			}
 		}
 		
 		// Si le joueur a choisi de jouer une autre carte, il choisit quelle carte jouer et comment la jouer
@@ -55,7 +72,8 @@ public class Panique extends Carte implements Serializable {
 				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getOeuvre());
 				break;
 			case 2:
-				carteChoisie.activerCapacite();
+				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueurAdverse.getTempo());
+				carteChoisie.activerCapacite(joueur);
 				break;
 			case 3:
 				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getVieFuture());

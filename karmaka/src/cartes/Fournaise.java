@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import karmaka.Carte;
 import karmaka.Joueur;
+import karmaka.JoueurHumain;
 import karmaka.Partie;
 
 public class Fournaise extends Carte implements Serializable {
@@ -18,8 +19,26 @@ public class Fournaise extends Carte implements Serializable {
 		
 		// Le joueur adverse défausse les 2 premières cartes de sa vie future
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
-		for (int i=0;i<2;i++) {
-			joueurAdverse.defausser(joueurAdverse.getVieFuture().getLast(), joueurAdverse.getVieFuture());
+		switch (joueurAdverse.getVieFuture().size()) {
+			case 0:
+				if (joueur instanceof JoueurHumain) {
+					console.afficher("Votre adversaire n'a aucune carte dans sa Vie Future...");
+				}
+				break;
+			case 1:
+				if (joueur instanceof JoueurHumain) {
+					console.afficher("Votre adversaire défausse une première carte de sa Vie Future, mais il n'a plus aucune carte dans sa Vie Future...");
+				}
+				joueurAdverse.defausser(joueurAdverse.getVieFuture().getLast(), joueurAdverse.getVieFuture());
+				break;
+			default:
+				if (joueur instanceof JoueurHumain) {
+					console.afficher("Votre adversaire défausse les 2 premières cartes de sa Vie Future.");
+				}
+				for (int i=0;i<2;i++) {
+					joueurAdverse.defausser(joueurAdverse.getVieFuture().getLast(), joueurAdverse.getVieFuture());
+				}
+				break;
 		}
 		
 	}

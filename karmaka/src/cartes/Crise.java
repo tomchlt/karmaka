@@ -20,20 +20,31 @@ public class Crise extends Carte implements Serializable {
 		
 		// Le joueur adverse choisit quelle carte de ses oeuvres il préfère défausser
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
-		int choixCarte = -1;
-		if (joueurAdverse instanceof JoueurHumain) {
-			console.afficher("**********************************************************************");
-			console.afficher("Choix pour le joueur adverse (" + joueurAdverse.getNom() + ") :");
-			while (choixCarte<0 || choixCarte>=joueurAdverse.getOeuvre().size()) {
-				console.afficher("Quelle carte de vos Oeuvres préférez-vous défausser ? (Entrez le numéro de la carte)");
-				choixCarte = console.lireInt();
+		if (joueurAdverse.getOeuvre().isEmpty()==false) {
+			int choixCarte = -1;
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Votre adversaire va défausser une carte de ses Oeuvres.");
 			}
-			console.afficher("**********************************************************************");
-		} else if (joueurAdverse instanceof JoueurVirtuel) {
-			// A RAJOUTER
+			if (joueurAdverse instanceof JoueurHumain) {
+				console.afficher("\n**********************************************************************");
+				console.afficher("/!\\ Choix pour " + joueurAdverse.getNom() + " /!\\");
+				console.afficher("Cartes dans vos Oeuvres :");
+				((JoueurHumain) joueurAdverse).afficherCartes(joueurAdverse.getOeuvre());
+				while (choixCarte<0 || choixCarte>=joueurAdverse.getOeuvre().size()) {
+					console.afficher("Quelle carte de vos Oeuvres préférez-vous défausser ? (Entrez le numéro de la carte)");
+					choixCarte = console.lireInt();
+				}
+				console.afficher("**********************************************************************\n");
+			} else if (joueurAdverse instanceof JoueurVirtuel) {
+				// A RAJOUTER
+			}
+			Carte carteChoisie = joueurAdverse.getOeuvre().get(choixCarte);
+			joueurAdverse.defausser(carteChoisie, joueurAdverse.getOeuvre());
+		} else {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Votre adversaire n'a aucune carte dans ses Oeuvres...");
+			}
 		}
-		Carte carteChoisie = joueurAdverse.getOeuvre().get(choixCarte);
-		joueurAdverse.defausser(carteChoisie, joueurAdverse.getOeuvre());
 		
 	}
 

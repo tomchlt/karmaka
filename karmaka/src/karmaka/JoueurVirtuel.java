@@ -115,17 +115,6 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 		}
 	}
 
-	public void afficherCartes(LinkedList<Carte> emplacement) {
-		Iterator<Carte> it = emplacement.iterator();
-		while (it.hasNext()) {
-			console.afficher(it.next());
-		}
-	}
-
-	public static void main(String[] args) {
-
-	}
-
 	public Strategie getStrategie() {
 		return strategie;
 	}
@@ -133,4 +122,9 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 	public void setStrategie(Strategie strategie) {
 		this.strategie = strategie;
 	}
+
+	public static void main(String[] args) {
+
+	}
+	
 }

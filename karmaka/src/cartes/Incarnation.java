@@ -19,17 +19,25 @@ public class Incarnation extends Carte implements Serializable {
 	public void activerCapacite(Joueur joueur) {
 		
 		// Le joueur choisit une carte de ses oeuvres dont il veut copier le pouvoir
-		int choixCarte = -1;
-		if (joueur instanceof JoueurHumain) {
-			while (choixCarte<0 || choixCarte>=joueur.getOeuvre().size()) {
-				console.afficher("De quelle carte voulez-vous copier le pouvoir ? (Entrez le numéro de cette carte)");
-				choixCarte = console.lireInt();
+		if (joueur.getOeuvre().isEmpty()==false) {
+			int choixCarte = -1;
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Cartes dans votre Main :");
+				((JoueurHumain) joueur).afficherCartes(joueur.getMain());
+				while (choixCarte<0 || choixCarte>=joueur.getOeuvre().size()) {
+					console.afficher("De quelle carte voulez-vous copier le pouvoir ? (Entrez le numéro de cette carte)");
+					choixCarte = console.lireInt();
+				}
+			} else if (joueur instanceof JoueurVirtuel) {
+				// A RAJOUTER
 			}
-		} else if (joueur instanceof JoueurVirtuel) {
-			// A RAJOUTER
+			Carte carteChoisie = joueur.getOeuvre().get(choixCarte);
+			carteChoisie.activerCapacite(joueur);
+		} else {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Vous n'avez aucune carte dans vos Oeuvres...");
+			}
 		}
-		Carte carteChoisie = joueur.getOeuvre().get(choixCarte);
-		carteChoisie.activerCapacite();
 		
 	}
 

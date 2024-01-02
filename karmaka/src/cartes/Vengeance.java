@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import karmaka.Carte;
 import karmaka.Joueur;
+import karmaka.JoueurHumain;
 import karmaka.Partie;
 
 public class Vengeance extends Carte implements Serializable {
@@ -18,7 +19,16 @@ public class Vengeance extends Carte implements Serializable {
 		
 		// Le joueur adverse défausse son oeuvre exposée
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
-		joueurAdverse.defausser(joueurAdverse.getOeuvre().getLast(), joueurAdverse.getOeuvre());
+		if (joueurAdverse.getOeuvre().isEmpty()==false) {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Votre adversaire défausse son Oeuvre exposée.");
+			}
+			joueurAdverse.defausser(joueurAdverse.getOeuvre().getLast(), joueurAdverse.getOeuvre());
+		} else {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Votre adversaire n'a aucune carte dans ses Oeuvres...");
+			}
+		}
 		
 	}
 

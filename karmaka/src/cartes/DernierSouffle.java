@@ -20,20 +20,31 @@ public class DernierSouffle extends Carte implements Serializable {
 		
 		// Le joueur adverse choisit quelle carte de sa main il préfère défausser
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
-		int choixCarte = -1;
-		if (joueurAdverse instanceof JoueurHumain) {
-			console.afficher("**********************************************************************");
-			console.afficher("Choix pour le joueur adverse (" + joueurAdverse.getNom() + ") :");
-			while (choixCarte<0 || choixCarte>=joueurAdverse.getMain().size()) {
-				console.afficher("Quelle carte de votre Main préférez-vous défausser ? (Entrez le numéro de la carte)");
-				choixCarte = console.lireInt();
+		if (joueurAdverse.getMain().isEmpty()==false) {
+			int choixCarte = -1;
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Votre adversaire va défausser une carte de sa Main.");
 			}
-			console.afficher("**********************************************************************");
-		} else if (joueurAdverse instanceof JoueurVirtuel) {
-			// A RAJOUTER
+			if (joueurAdverse instanceof JoueurHumain) {
+				console.afficher("\n**********************************************************************");
+				console.afficher("/!\\ Choix pour " + joueurAdverse.getNom() + " /!\\");
+				console.afficher("Cartes dans votre Main :");
+				((JoueurHumain) joueurAdverse).afficherCartes(joueurAdverse.getMain());
+				while (choixCarte<0 || choixCarte>=joueurAdverse.getMain().size()) {
+					console.afficher("Quelle carte de votre Main préférez-vous défausser ? (Entrez le numéro de la carte)");
+					choixCarte = console.lireInt();
+				}
+				console.afficher("**********************************************************************\n");
+			} else if (joueurAdverse instanceof JoueurVirtuel) {
+				// A RAJOUTER
+			}
+			Carte carteChoisie = joueurAdverse.getMain().get(choixCarte);
+			joueurAdverse.defausser(carteChoisie, joueurAdverse.getMain());
+		} else {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Votre adversaire n'a aucune carte dans sa Main...");
+			}
 		}
-		Carte carteChoisie = joueurAdverse.getMain().get(choixCarte);
-		joueurAdverse.defausser(carteChoisie, joueurAdverse.getMain());
 		
 	}
 

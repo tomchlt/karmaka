@@ -131,6 +131,8 @@ public class JoueurHumain extends Joueur implements Serializable {
 				deplacerCarte(carteChoisie, main, oeuvre);
 				break;
 			case 2:
+				Joueur joueurAdverse = carteChoisie.determinerJoueurAdverse(this);
+				deplacerCarte(carteChoisie, main, joueurAdverse.getTempo());
 				carteChoisie.activerCapacite();
 				break;
 			case 3:
@@ -141,8 +143,10 @@ public class JoueurHumain extends Joueur implements Serializable {
 	
 	public void afficherCartes(LinkedList<Carte> emplacement) {
 		Iterator<Carte> it = emplacement.iterator();
+		int i = 0;
 		while (it.hasNext()) {
-			console.afficher(it.next());
+			console.afficher("[" + i + "] \t" + it.next());
+			i++;
 		}
 	}
 	

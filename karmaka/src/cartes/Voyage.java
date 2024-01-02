@@ -19,6 +19,9 @@ public class Voyage extends Carte implements Serializable {
 	public void activerCapacite(Joueur joueur) {
 		
 		// Le joueur puise 3 cartes à la source
+		if (joueur instanceof JoueurHumain) {
+			console.afficher("Vous puisez 3 cartes à la Source.");
+		}
 		for (int i=0;i<3;i++) {
 			joueur.puiser(joueur.getMain());
 		}
@@ -26,6 +29,8 @@ public class Voyage extends Carte implements Serializable {
 		// Le joueur choisit de jouer une autre carte ou non
 		int choixJouer = 0;
 		if (joueur instanceof JoueurHumain) {
+			console.afficher("Cartes dans votre Main :");
+			((JoueurHumain) joueur).afficherCartes(joueur.getMain());
 			while (choixJouer!=1 && choixJouer!=2) {
 				console.afficher("Voulez-vous jouer une autre carte ? (Entrez [1] pour OUI, [2] pour NON)");
 				choixJouer = console.lireInt();
@@ -56,7 +61,9 @@ public class Voyage extends Carte implements Serializable {
 				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getOeuvre());
 				break;
 			case 2:
-				carteChoisie.activerCapacite();
+				Joueur joueurAdverse = determinerJoueurAdverse(joueur);
+				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueurAdverse.getTempo());
+				carteChoisie.activerCapacite(joueur);
 				break;
 			case 3:
 				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getVieFuture());
