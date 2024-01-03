@@ -15,8 +15,10 @@ public class Deni extends Carte implements Serializable {
 	}
 
 	public void activerCapactite(Joueur joueur) {
+		/**
 		joueur.defausser(carte, joueur.getMain());
 		//Comment copier le pouvoir d'une carte ?
 		carte.activerCapactite(Joueur joueur);//Ne faudrait-il pas mettre toutes les capacité de carte avec la même signature ?
+		*/
 	}
 }
