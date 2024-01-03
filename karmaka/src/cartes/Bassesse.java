@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 import java.util.Random;
 
-import karmaka.Carte;
-import karmaka.Joueur;
-import karmaka.JoueurHumain;
-import karmaka.Partie;
+import jeu.Carte;
+import jeu.Joueur;
+import jeu.JoueurHumain;
+import jeu.Partie;
 
 public class Bassesse extends Carte implements Serializable {
 

@@ -2,10 +2,10 @@ package cartes;
 
 import java.io.Serializable;
 
-import karmaka.Carte;
-import karmaka.Joueur;
-import karmaka.JoueurHumain;
-import karmaka.Partie;
+import jeu.Carte;
+import jeu.Joueur;
+import jeu.JoueurHumain;
+import jeu.Partie;
 
 public class Fournaise extends Carte implements Serializable {
 

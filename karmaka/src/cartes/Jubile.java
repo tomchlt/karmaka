@@ -2,11 +2,11 @@ package cartes;
 
 import java.io.Serializable;
 
-import karmaka.Carte;
-import karmaka.Joueur;
-import karmaka.JoueurHumain;
-import karmaka.JoueurVirtuel;
-import karmaka.Partie;
+import jeu.Carte;
+import jeu.Joueur;
+import jeu.JoueurHumain;
+import jeu.JoueurVirtuel;
+import jeu.Partie;
 
 public class Jubile extends Carte implements Serializable {
 

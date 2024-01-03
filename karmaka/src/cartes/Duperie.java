@@ -3,9 +3,9 @@ package cartes;
 import java.io.Serializable;
 import java.util.Random;
 
-import karmaka.Carte;
-import karmaka.Joueur;
-import karmaka.Partie;
+import jeu.Carte;
+import jeu.Joueur;
+import jeu.Partie;
 
 public class Duperie extends Carte implements Serializable {
 

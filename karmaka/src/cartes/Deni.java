@@ -2,10 +2,9 @@ package cartes;
 
 import java.io.Serializable;
 
-
-import karmaka.Carte;
-import karmaka.Joueur;
-import karmaka.Partie;
+import jeu.Carte;
+import jeu.Joueur;
+import jeu.Partie;
 
 public class Deni extends Carte implements Serializable {
 	
