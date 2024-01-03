@@ -12,10 +12,10 @@ public class StrategieDebutant extends Strategie implements Serializable {
 		super("Débutant", "Une difficulté adaptée pour commencer le jeu");
 	}
 
-	public int choisirCarte(JoueurVirtuel joueurV) {
+	public Carte choisirCarte(JoueurVirtuel joueurV, int choix) {
 		Random random = new Random();
-		int indiceCarteAleatoire = random.nextInt(joueurV.getMain().size());
-		return indiceCarteAleatoire;
+		Carte CarteAleatoire = joueurV.getMain().get(random.nextInt(joueurV.getMain().size()));
+		return CarteAleatoire;
 	}
 
 	public int jouerCarte(JoueurVirtuel joueurV) {

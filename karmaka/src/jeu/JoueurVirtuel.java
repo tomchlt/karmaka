@@ -100,14 +100,13 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 	}
 
 	public void jouer() {
-		int choixCarte = strategie.choisirCarte(this);
-		Carte carteChoisie = main.get(choixCarte);
-		int choix = strategie.jouerCarte();
+		Carte carteChoisie = strategie.choisirCarte(this);
+		int choix = strategie.jouerCarte(this);
 		if (choix == 1) {
 			deplacerCarte(carteChoisie, main, oeuvre);
 			console.afficher("Le joueur adverse place dans ses oeuvres la carte " + carteChoisie.toString());
 		} else if (choix == 2) {
-			carteChoisie.activerCapacite();
+			carteChoisie.activerCapacite(this);
 			console.afficher("Le joueur adverse joue pour ses pouvoirs la carte " + carteChoisie.toString());
 		} else if (choix == 3) {
 			deplacerCarte(carteChoisie, main, vieFuture);

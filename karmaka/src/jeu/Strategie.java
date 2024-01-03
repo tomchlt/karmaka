@@ -7,6 +7,22 @@ public abstract class Strategie implements Serializable {
 	
 	private static final long serialVersionUID = 1388578098956615836L;
 	
+	public String getNomStrategie() {
+		return nomStrategie;
+	}
+
+	public void setNomStrategie(String nomStrategie) {
+		this.nomStrategie = nomStrategie;
+	}
+
+	public String getDescriptionStrategie() {
+		return descriptionStrategie;
+	}
+
+	public void setDescriptionStrategie(String descriptionStrategie) {
+		this.descriptionStrategie = descriptionStrategie;
+	}
+
 	private String nomStrategie;
 	private String descriptionStrategie;
 	
@@ -19,7 +35,7 @@ public abstract class Strategie implements Serializable {
 		
 	}
 	
-	public abstract int choisirCarte(JoueurVirtuel joueurV);
+	public abstract Carte choisirCarte(JoueurVirtuel joueurV, int choix);
 	
 	public abstract int jouerCarte(JoueurVirtuel joueurV);
 	
