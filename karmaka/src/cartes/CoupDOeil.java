@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import jeu.Carte;
 import jeu.Joueur;
+import jeu.JoueurHumain;
+import jeu.JoueurVirtuel;
 import jeu.Partie;
 
 public class CoupDOeil extends Carte implements Serializable {
@@ -17,10 +19,37 @@ public class CoupDOeil extends Carte implements Serializable {
 
 	public void activerCapacite(Joueur joueur) {
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
-		System.out.println(joueurAdverse.getMain());
-		// A RAJOUTER : demander au joueur si il veut continuer en jouant une autre
-		// carte
-		if (veutContinuer) {
+		int choixContinuer = 0;
+		//Si la main du rival n'est pas vide alors on peut effectuer l'action
+		if (joueurAdverse.getMain().isEmpty() == false) {
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Cartes dans la Main de votre adversaire :");
+				//on affiche les cartes de la main de l'adversaire
+				((JoueurHumain) joueur).afficherCartes(joueurAdverse.getMain());
+				while (choixContinuer != 1 && choixContinuer != 2) {
+					//on demande au joueur si il vaut joueur une autre carte
+					console.afficher("Voulez-vous jouer une autre carte ? (Entrez [1] pour OUI, [2] pour NON)");
+					choixContinuer = console.lireInt();
+				}
+			} else if (joueur instanceof JoueurVirtuel) {
+				//on consièdre que le bot voudras touours jouer une autre carte, ce qui est souvent plus avantageux
+				choixContinuer = 1;
+			}
+		} else {
+			if (joueur instanceof JoueurHumain) {
+				//sinon message d'erreur
+				console.afficher("Votre adversaire n'a pas de carte dans sa Main");
+				//mais le joueur peut quand même jouer une autre carte
+				while (choixContinuer != 1 && choixContinuer != 2) {
+					console.afficher("Voulez-vous jouer une autre carte ? (Entrez [1] pour OUI, [2] pour NON)");
+					choixContinuer = console.lireInt();
+				}
+			} else if (joueur instanceof JoueurVirtuel) {
+				choixContinuer = 1;
+			}
+		}
+		//On appelle la fonction jouer() du joueur pour jouer une autre carte
+		if (choixContinuer == 1) {
 			joueur.jouer();
 		}
 	}
