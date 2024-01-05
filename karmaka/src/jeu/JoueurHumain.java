@@ -133,7 +133,7 @@ public class JoueurHumain extends Joueur implements Serializable {
 			case 2:
 				Joueur joueurAdverse = carteChoisie.determinerJoueurAdverse(this);
 				deplacerCarte(carteChoisie, main, joueurAdverse.getTempo());
-				carteChoisie.activerCapacite();
+				carteChoisie.activerCapacite(this);
 				break;
 			case 3:
 				deplacerCarte(carteChoisie, main, vieFuture);

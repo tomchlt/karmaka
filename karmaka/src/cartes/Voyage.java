@@ -22,6 +22,9 @@ public class Voyage extends Carte implements Serializable {
 		if (joueur instanceof JoueurHumain) {
 			console.afficher("Vous puisez 3 cartes à la Source.");
 		}
+		if (joueur instanceof JoueurVirtuel) {
+			console.afficher("Le Joueur Virtuel adverse puise 3 cartes à la Source.");
+		}
 		for (int i=0;i<3;i++) {
 			joueur.puiser(joueur.getMain());
 		}
@@ -36,7 +39,8 @@ public class Voyage extends Carte implements Serializable {
 				choixJouer = console.lireInt();
 			}
 		} else if (joueur instanceof JoueurVirtuel) {
-			// A RAJOUTER
+			console.afficher("Le Joueur Virtuel joue une autre carte");
+			choixJouer = 1;
 		}
 		
 		// Si le joueur a choisi de jouer une autre carte, il choisit quelle carte jouer et comment la jouer
@@ -53,7 +57,7 @@ public class Voyage extends Carte implements Serializable {
 					choix = console.lireInt();
 				}
 			} else if (joueur instanceof JoueurVirtuel) {
-				// A RAJOUTER
+				joueur.jouer();
 			}
 			Carte carteChoisie = joueur.getMain().get(choixCarte);
 			switch (choix) {

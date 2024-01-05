@@ -31,8 +31,8 @@ public class StrategieAvance extends Strategie implements Serializable {
 		return carteAJouer;
 	}
 
-	public Carte choisirCarteDéfausser(JoueurVirtuel joueurV) {
-		LinkedList<Carte> cartesAChoisir = trouverCartesCouleurMinEmplacement(joueurV, joueurV.getMain());
+	public Carte choisirCarteDéfausser(JoueurVirtuel joueurV, LinkedList<Carte> emplacement) {
+		LinkedList<Carte> cartesAChoisir = trouverCartesCouleurMinEmplacement(joueurV, emplacement);
 		Carte carteAJouer = trouverCartePtsMin(cartesAChoisir);
 		return carteAJouer;
 	}
@@ -160,29 +160,33 @@ public class StrategieAvance extends Strategie implements Serializable {
 		// on récupère les informations du joueur
 		int[] pts = compterPoints(emplacement);
 		int couleurMin = 0;
-		Carte carteATester1 = null;
-		// on détermine la couleur avec les plus hauts points, celle pour laquelle le
-		// bot va jouer pour ses oeuvres
-		couleurMin = Math.min(Math.min(pts[0], pts[1]), pts[2]);
-		// on parcourt chaque carte de sa main
 		LinkedList<Carte> cartesAChoisir = new LinkedList<>();
-		Iterator<Carte> itMain = joueurV.getMain().iterator();
-		while (itMain.hasNext()) {
-			carteATester1 = itMain.next();
-			// si la carte a des points de la bonne couleur on la met dans une seconde liste
-			if (couleurMin == pts[0]) {
-				if (carteATester1.getPointsBleus() != 0) {
-					cartesAChoisir.add(carteATester1);
+		Carte carteATester1 = null;
+		//si il n'y a qu'une seule couleur de carte, la couleur minimale est la couleur maximale
+		if ((pts[0] == 0 && pts[1] == 0) || (pts[0] == 0 && pts[2] == 0) || (pts[1] == 0 && pts[2] == 0)) {
+			cartesAChoisir = trouverCartesCouleurMaxEmplacement(joueurV, emplacement);
+		} else {
+			// on détermine la couleur avec les plus bas points
+			couleurMin = Math.min(Math.min(pts[0], pts[1]), pts[2]);
+			// on parcourt chaque carte de sa main
+			Iterator<Carte> itMain = joueurV.getMain().iterator();
+			while (itMain.hasNext()) {
+				carteATester1 = itMain.next();
+				// si la carte a des points de la bonne couleur on la met dans une seconde liste
+				if (couleurMin == pts[0]) {
+					if (carteATester1.getPointsBleus() != 0) {
+						cartesAChoisir.add(carteATester1);
+					}
 				}
-			}
-			if (couleurMin == pts[1]) {
-				if (carteATester1.getPointsRouges() != 0) {
-					cartesAChoisir.add(carteATester1);
+				if (couleurMin == pts[1]) {
+					if (carteATester1.getPointsRouges() != 0) {
+						cartesAChoisir.add(carteATester1);
+					}
 				}
-			}
-			if (couleurMin == pts[2]) {
-				if (carteATester1.getPointsVerts() != 0) {
-					cartesAChoisir.add(carteATester1);
+				if (couleurMin == pts[2]) {
+					if (carteATester1.getPointsVerts() != 0) {
+						cartesAChoisir.add(carteATester1);
+					}
 				}
 			}
 		}

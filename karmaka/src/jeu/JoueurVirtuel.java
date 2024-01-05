@@ -108,7 +108,7 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 			console.afficher("Le joueur adverse place dans ses oeuvres la carte ");
 			console.afficher(carteChoisie.toString());
 		} else if (choix == 2) {
-			carteChoisie = strategie.choisirCarteDéfausser(this);
+			carteChoisie = strategie.choisirCarteDéfausser(this, this.getMain());
 			carteChoisie.activerCapacite(this);
 			console.afficher("Le joueur adverse joue pour ses pouvoirs la carte ");
 			console.afficher(carteChoisie.toString());
@@ -130,5 +130,5 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 	public static void main(String[] args) {
 
 	}
-	
+
 }

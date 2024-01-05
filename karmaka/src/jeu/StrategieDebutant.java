@@ -44,7 +44,7 @@ public class StrategieDebutant extends Strategie implements Serializable {
 		return CarteAleatoire;
 	}
 
-	public Carte choisirCarteDéfausser(JoueurVirtuel joueurV) {
+	public Carte choisirCarteDéfausser(JoueurVirtuel joueurV, LinkedList<Carte> emplacement) {
 		Random random = new Random();
 		Carte CarteAleatoire = joueurV.getMain().get(random.nextInt(joueurV.getMain().size()));
 		return CarteAleatoire;

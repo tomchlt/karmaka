@@ -22,8 +22,12 @@ public class Crise extends Carte implements Serializable {
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
 		if (joueurAdverse.getOeuvre().isEmpty()==false) {
 			int choixCarte = -1;
+			Carte carteChoisie = null;
 			if (joueur instanceof JoueurHumain) {
 				console.afficher("Votre adversaire va défausser une carte de ses Oeuvres.");
+			}
+			if (joueur instanceof JoueurHumain) {
+				console.afficher("Vous devez défausser une carte de vos Oeuvres");
 			}
 			if (joueurAdverse instanceof JoueurHumain) {
 				console.afficher("\n**********************************************************************");
@@ -34,15 +38,20 @@ public class Crise extends Carte implements Serializable {
 					console.afficher("Quelle carte de vos Oeuvres préférez-vous défausser ? (Entrez le numéro de la carte)");
 					choixCarte = console.lireInt();
 				}
+				carteChoisie = joueurAdverse.getOeuvre().get(choixCarte);
 				console.afficher("**********************************************************************\n");
 			} else if (joueurAdverse instanceof JoueurVirtuel) {
-				// A RAJOUTER
+				carteChoisie = ((JoueurVirtuel) joueurAdverse).getStrategie().choisirCarteDéfausser((JoueurVirtuel)joueurAdverse, joueurAdverse.getOeuvre());
+				console.afficher("Le Joueur Virtuel adverse défausse de ses Oeuvres la carte : ");
+				console.afficher(carteChoisie.toString());
 			}
-			Carte carteChoisie = joueurAdverse.getOeuvre().get(choixCarte);
 			joueurAdverse.defausser(carteChoisie, joueurAdverse.getOeuvre());
 		} else {
 			if (joueur instanceof JoueurHumain) {
 				console.afficher("Votre adversaire n'a aucune carte dans ses Oeuvres...");
+			}
+			if (joueur instanceof JoueurVirtuel) {
+				console.afficher("Vous n'avez pas de Carte dans vos Oeuvre, vous ne pouvez donc pas en défausser");
 			}
 		}
 		
