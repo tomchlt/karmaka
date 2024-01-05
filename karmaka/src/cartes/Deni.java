@@ -34,6 +34,8 @@ public class Deni extends Carte implements Serializable {
 				//si le joueur est virtuel on lui demande quelle carte il veut défausser
 			} else if (joueur instanceof JoueurVirtuel) {
 				carteChoisie = ((JoueurVirtuel) joueur).getStrategie().choisirCarteDéfausser((JoueurVirtuel) joueur);
+				console.afficher("Le Joueur virtuel défausse mais copie le pouvoir de la carte");
+				console.afficher(carteChoisie.toString());
 			}
 			//on active la capacité de la carte sélectionner avant de la défausser
 			carteChoisie.activerCapacite(joueur);

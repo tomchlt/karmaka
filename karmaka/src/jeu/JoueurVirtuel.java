@@ -105,11 +105,13 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 		if (choix == 1) {
 			carteChoisie = strategie.choisirCarteOeuvre(this);
 			deplacerCarte(carteChoisie, main, oeuvre);
-			console.afficher("Le joueur adverse place dans ses oeuvres la carte " + carteChoisie.toString());
+			console.afficher("Le joueur adverse place dans ses oeuvres la carte ");
+			console.afficher(carteChoisie.toString());
 		} else if (choix == 2) {
 			carteChoisie = strategie.choisirCarteDéfausser(this);
 			carteChoisie.activerCapacite(this);
-			console.afficher("Le joueur adverse joue pour ses pouvoirs la carte " + carteChoisie.toString());
+			console.afficher("Le joueur adverse joue pour ses pouvoirs la carte ");
+			console.afficher(carteChoisie.toString());
 		} else if (choix == 3) {
 			carteChoisie = strategie.choisirCarteVieFuture(this);
 			deplacerCarte(carteChoisie, main, vieFuture);

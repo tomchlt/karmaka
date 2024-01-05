@@ -208,7 +208,7 @@ public class StrategieAvance extends Strategie implements Serializable {
 			couleurVieFuture = couleurMax;
 		} else {
 			// sinon ce sera la couleur qui n'est ni maximale ni minimale
-			for (int i = 0; i < 3; i++) {
+			for (int i = 1; i <= 3; i++) {
 				if (pts[i] != couleurMax && pts[i] != couleurMin) {
 					couleurVieFuture = pts[i];
 				}
@@ -253,5 +253,9 @@ public class StrategieAvance extends Strategie implements Serializable {
 
 	public void setOeuvreProtegee(boolean oeuvreProtegee) {
 		this.oeuvreProtegee = oeuvreProtegee;
+	}
+
+	public Carte selectionnerCarte(LinkedList<Carte> cartesAChoisir) {
+		return super.trouverCartePtsMax(cartesAChoisir);
 	}
 }

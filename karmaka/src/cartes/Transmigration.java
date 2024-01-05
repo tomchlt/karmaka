@@ -32,6 +32,7 @@ public class Transmigration extends Carte implements Serializable {
 					choixCarte = console.lireInt();
 				}
 			} else if (joueur instanceof JoueurVirtuel) {
+				console.afficher("Le Joueur Virtuel prend une carte de sa Vie Future pour la remettre dans sa Main");
 				carteChoisie = ((JoueurVirtuel) joueur).getStrategie().trouverCartePtsMin(joueur.getVieFuture());
 			}
 			// on déplace la carte choisie
@@ -41,6 +42,9 @@ public class Transmigration extends Carte implements Serializable {
 			// sinon message d'erreur
 			if (joueur instanceof JoueurHumain) {
 				console.afficher("Vous n'avez pas de carte dans votre Vie Future");
+			}
+			if (joueur instanceof JoueurVirtuel) {
+				console.afficher("Le Joueur Virtuel n'a pas de carte dans sa Vie Future");
 			}
 		}
 	}

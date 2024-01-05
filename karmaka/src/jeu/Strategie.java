@@ -41,6 +41,8 @@ public abstract class Strategie implements Serializable {
 	public abstract Carte choisirCarteVieFuture(JoueurVirtuel joueurV);
 
 	public abstract Carte choisirCarteDéfausser(JoueurVirtuel joueurV);
+	
+	public abstract Carte selectionnerCarte(LinkedList<Carte> cartesAChoisir);
 
 	public abstract int jouerCarte(JoueurVirtuel joueurV);
 

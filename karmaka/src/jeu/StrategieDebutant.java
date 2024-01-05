@@ -38,14 +38,12 @@ public class StrategieDebutant extends Strategie implements Serializable {
 
 	}
 
-	@Override
 	public Carte choisirCarteVieFuture(JoueurVirtuel joueurV) {
 		Random random = new Random();
 		Carte CarteAleatoire = joueurV.getMain().get(random.nextInt(joueurV.getMain().size()));
 		return CarteAleatoire;
 	}
 
-	@Override
 	public Carte choisirCarteDéfausser(JoueurVirtuel joueurV) {
 		Random random = new Random();
 		Carte CarteAleatoire = joueurV.getMain().get(random.nextInt(joueurV.getMain().size()));
@@ -58,5 +56,11 @@ public class StrategieDebutant extends Strategie implements Serializable {
 
 	public Carte trouverCartePtsMin(LinkedList<Carte> cartesAChoisir) {
 		return super.trouverCartePtsMin(cartesAChoisir);
+	}
+
+	public Carte selectionnerCarte(LinkedList<Carte> cartesAChoisir) {
+		Random random = new Random();
+		Carte CarteAleatoire = cartesAChoisir.get(random.nextInt(cartesAChoisir.size()));
+		return CarteAleatoire;
 	}
 }

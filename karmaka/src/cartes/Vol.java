@@ -5,6 +5,7 @@ import java.io.Serializable;
 import jeu.Carte;
 import jeu.Joueur;
 import jeu.JoueurHumain;
+import jeu.JoueurVirtuel;
 import jeu.Partie;
 
 public class Vol extends Carte implements Serializable {
@@ -23,12 +24,19 @@ public class Vol extends Carte implements Serializable {
 				console.afficher("Vous volez l'Oeuvre exposée de votre adversaire qui est :");
 				console.afficher(carteAVoler);
 			}
+			if (joueur instanceof JoueurVirtuel) {
+				console.afficher("Le Joueur Virtuel vous vole votre Oeuvre exposée qui est :");
+				console.afficher(carteAVoler);
+			}
 			joueurAdverse.deplacerCarte(carteAVoler, joueurAdverse.getOeuvre(),
 					joueur.getOeuvre());
 		}
 		else {
 			if (joueur instanceof JoueurHumain) {
 				console.afficher("Votre adversaire n'a pas de carte dans ses Oeuvre");
+			}
+			if (joueur instanceof JoueurVirtuel) {
+				console.afficher("Vous n'avez pas de Cart dans vos Oeuvre que le joueur Virtuel peut prendre");
 			}
 		}
 	}
