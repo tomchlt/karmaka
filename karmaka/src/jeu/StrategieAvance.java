@@ -212,7 +212,7 @@ public class StrategieAvance extends Strategie implements Serializable {
 			couleurVieFuture = couleurMax;
 		} else {
 			// sinon ce sera la couleur qui n'est ni maximale ni minimale
-			for (int i = 1; i <= 3; i++) {
+			for (int i = 0; i <= 2; i++) {
 				if (pts[i] != couleurMax && pts[i] != couleurMin) {
 					couleurVieFuture = pts[i];
 				}
