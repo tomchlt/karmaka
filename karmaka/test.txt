@@ -1,10 +1,16 @@
 Cartes pas encore testées :
-Transmigration, Destinee, RevesBrises, Duperie, Vol, Lendemain,
-Jubile, Panique, DernierSouffle, Crise, Fournaise, Vengeance,
-Bassesse, Incarnation, Mimetisme
 
+Fournaise
+-------------------------------------------------------------
 Cartes qui ne marchent pas :
-(Deni, Semis, Longevite, Sauvetage, Recyclage, Transmigration --> il ne se passe rien)
 
+Deni, Semis, Longevite, Sauvetage, Recyclage, Transmigration, Lendemain, Fournaise --> il ne se passe rien
+
+Duperie --> ça donne bien une carte dans la main mais pas celle qu'on demande
+
+Destinee --> ConcurrentModificationException à la ligne 41
+c'est un problème lié aux Iterateurs mais j'ai pas trop compris
+-------------------------------------------------------------
 Cartes dont le pouvoir foncionne :
-Roulette, Voyage, CoupDOeil
+
+Roulette, Voyage, CoupDOeil, Vol, Jubile, Incarnation, Mimetisme, Crise, Bassesse, RevesBrises, Panique, DernierSouffle, Vengeance

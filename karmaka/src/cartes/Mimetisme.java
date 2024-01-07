@@ -21,13 +21,13 @@ public class Mimetisme extends Carte implements Serializable {
 		// Le pouvoir de l'oeuvre exposée du joueur adverse est copié
 		Joueur joueurAdverse = determinerJoueurAdverse(joueur);
 		if (joueurAdverse.getOeuvre().isEmpty()==false) {
+			Carte carte = joueurAdverse.getOeuvre().getLast();
 			if (joueur instanceof JoueurHumain) {
-				console.afficher("Vous copiez le pouvoir de l'Oeuvre exposée de votre adversaire.");
+				console.afficher("Vous copiez le pouvoir de l'Oeuvre exposée de votre adversaire : " + carte.getNom());
 			}
 			if (joueur instanceof JoueurVirtuel) {
-				console.afficher("Le Joueur Virtuel adverse copie le pouvoir de votre Oeuvre exposée");
+				console.afficher("Le Joueur Virtuel adverse copie le pouvoir de votre Oeuvre exposée : " + carte.getNom());
 			}
-			Carte carte = joueurAdverse.getOeuvre().getLast();
 			carte.activerCapacite(joueur);
 		} else {
 			if (joueur instanceof JoueurHumain) {

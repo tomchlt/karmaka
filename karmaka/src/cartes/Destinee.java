@@ -26,7 +26,7 @@ public class Destinee extends Carte implements Serializable {
 		LinkedList<Carte> source = joueur.getSource();
 		int choixCarte1 = -1;
 		int choixCarte2 = -1;
-		for (int i = 0; i <= 2; i++) {
+		for (int i = 1; i <= 3; i++) {
 			joueur.deplacerCarte(source.get(source.size() - i), source, cartesARegarder);
 			if (source.size() == 0) {
 				while (joueur.getFosse().size() > 3) {

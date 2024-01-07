@@ -41,16 +41,18 @@ public class CoupDOeil extends Carte implements Serializable {
 				// sinon message d'erreur
 				console.afficher("Votre adversaire n'a pas de carte dans sa Main");
 				// mais le joueur peut quand même jouer une autre carte
-				while (choixContinuer != 1 && choixContinuer != 2) {
-					console.afficher("Voulez-vous jouer une autre carte ? (Entrez [1] pour OUI, [2] pour NON)");
-					choixContinuer = console.lireInt();
+				if (joueur.getMain().isEmpty()==false) {
+					while (choixContinuer != 1 && choixContinuer != 2) {
+						console.afficher("Voulez-vous jouer une autre carte ? (Entrez [1] pour OUI, [2] pour NON)");
+						choixContinuer = console.lireInt();
+					}
 				}
 			} else if (joueur instanceof JoueurVirtuel) {
 				choixContinuer = 1;
 			}
 		}
 		// On appelle la fonction jouer() du joueur pour jouer une autre carte
-		if (choixContinuer == 1) {
+		if (choixContinuer == 1 && joueur.getMain().isEmpty()==false) {
 			if (joueur instanceof JoueurHumain) {
 				console.afficher("Vous jouez une autre Carte");
 				console.afficher("Cartes dans votre Main :");

@@ -26,12 +26,10 @@ public class Crise extends Carte implements Serializable {
 			if (joueur instanceof JoueurHumain) {
 				console.afficher("Votre adversaire va défausser une carte de ses Oeuvres.");
 			}
-			if (joueur instanceof JoueurHumain) {
-				console.afficher("Vous devez défausser une carte de vos Oeuvres");
-			}
 			if (joueurAdverse instanceof JoueurHumain) {
 				console.afficher("\n**********************************************************************");
 				console.afficher("/!\\ Choix pour " + joueurAdverse.getNom() + " /!\\");
+				console.afficher("Vous devez défausser une carte de vos Oeuvres");
 				console.afficher("Cartes dans vos Oeuvres :");
 				((JoueurHumain) joueurAdverse).afficherCartes(joueurAdverse.getOeuvre());
 				while (choixCarte<0 || choixCarte>=joueurAdverse.getOeuvre().size()) {

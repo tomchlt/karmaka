@@ -116,6 +116,29 @@ public class JoueurHumain extends Joueur implements Serializable {
 			nbAnneauxKarmiques += 1;
 			console.afficher("Votre réincarnation a échoué, mais vous recevez 1 anneau karmique.");
 		}
+		// le joueur renait :
+		console.afficher("Vous allez renaître...");
+		// 1. le joueur défausse ses oeuvres
+		console.afficher("Vous défaussez vos Oeuvres.");
+		int nbCartesADefausser = oeuvre.size();
+		for (int i=0;i<nbCartesADefausser;i++) {
+			defausser(oeuvre.getLast(), oeuvre);
+		}
+		// 2. le joueur récupère les cartes de sa vie future dans sa main
+		console.afficher("Vous récupérez les cartes de votre Vie Future dans votre Main.");
+		int nbCartesADeplacer = vieFuture.size();
+		for (int i=0;i<nbCartesADeplacer;i++) {
+			deplacerCarte(vieFuture.getLast(), vieFuture, main);
+		}
+		// 3. le joueur crée sa nouvelle pile
+		if (main.size()<6) {
+			int i = 0;
+			while ( (main.size() + pile.size()) < 6 ) {
+				puiser();
+				i++;
+			}
+			console.afficher("Vous puisez " + i + " carte(s) à la Source que vous placez sur votre Pile.");
+		}
 	}
 
 	public void jouer() {

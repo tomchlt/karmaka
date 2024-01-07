@@ -147,15 +147,15 @@ public class Partie implements Serializable {
 	}
 
 	public void jouer() {
-		console.afficher("\nLa partie commence !\n");
+		console.afficher("\nLa partie commence !");
 		while (joueur1.getAGagne() == false && joueur2.getAGagne() == false) {
-			console.afficher("------------------------------| TOUR " + numTour + " |------------------------------\n");
+			console.afficher("\n------------------------------| TOUR " + numTour + " |------------------------------\n");
 			// le joueur 1 joue son tour
-			console.afficher("------------------------------| Tour de " + joueur1.getNom() + " |------------------------------\n");
+			console.afficher("\n------------------------------| Tour de " + joueur1.getNom() + " |------------------------------\n");
 			joueur1.tour();
 			// le joueur 2 joue son tour sauf si le joueur 1 a gagné la partie
 			if (joueur1.getAGagne() == false) {
-				console.afficher("------------------------------| Tour de " + joueur2.getNom() + " |------------------------------\n");
+				console.afficher("\n------------------------------| Tour de " + joueur2.getNom() + " |------------------------------\n");
 				joueur2.tour();
 			}
 			numTour ++;

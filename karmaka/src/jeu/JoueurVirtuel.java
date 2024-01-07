@@ -98,6 +98,23 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 			nbAnneauxKarmiques += 1;
 			console.afficher("Sa réincarnation a échoué, mais il reçoit 1 anneau karmique.");
 		}
+		// le joueur renait :
+		// 1. le joueur défausse ses oeuvres
+		int nbCartesADefausser = oeuvre.size();
+		for (int i=0;i<nbCartesADefausser;i++) {
+			defausser(oeuvre.getLast(), oeuvre);
+		}
+		// 2. le joueur récupère les cartes de sa vie future dans sa main
+		int nbCartesADeplacer = vieFuture.size();
+		for (int i=0;i<nbCartesADeplacer;i++) {
+			deplacerCarte(vieFuture.getLast(), vieFuture, main);
+		}
+		// 3. le joueur crée sa nouvelle pile
+		if (main.size()<6) {
+			while ( (main.size() + pile.size()) < 6 ) {
+				puiser();
+			}
+		}
 	}
 
 	public void jouer() {

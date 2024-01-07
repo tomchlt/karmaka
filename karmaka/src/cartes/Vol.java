@@ -28,15 +28,14 @@ public class Vol extends Carte implements Serializable {
 				console.afficher("Le Joueur Virtuel vous vole votre Oeuvre exposée qui est :");
 				console.afficher(carteAVoler);
 			}
-			joueurAdverse.deplacerCarte(carteAVoler, joueurAdverse.getOeuvre(),
-					joueur.getOeuvre());
+			joueurAdverse.deplacerCarte(carteAVoler, joueurAdverse.getOeuvre(), joueur.getMain());
 		}
 		else {
 			if (joueur instanceof JoueurHumain) {
 				console.afficher("Votre adversaire n'a pas de carte dans ses Oeuvre");
 			}
 			if (joueur instanceof JoueurVirtuel) {
-				console.afficher("Vous n'avez pas de Cart dans vos Oeuvre que le joueur Virtuel peut prendre");
+				console.afficher("Vous n'avez pas de carte dans vos Oeuvres que le joueur Virtuel peut prendre");
 			}
 		}
 	}
