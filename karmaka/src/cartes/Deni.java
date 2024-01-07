@@ -38,8 +38,8 @@ public class Deni extends Carte implements Serializable {
 				console.afficher(carteChoisie.toString());
 			}
 			//on active la capacité de la carte sélectionner avant de la défausser
-			carteChoisie.activerCapacite(joueur);
 			joueur.defausser(carteChoisie, joueur.getMain());
+			carteChoisie.activerCapacite(joueur);
 		} else {
 			//sinon message d'erreur à l'intention de l'humain
 			if (joueur instanceof JoueurHumain) {

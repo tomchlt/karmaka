@@ -68,16 +68,16 @@ public abstract class Carte implements Serializable {
 		sb.append(nom + "\t");
 		if ( (pointsRouges == pointsVerts) && (pointsVerts == pointsBleus) ) {
 			sb.append("Type : Mosaïque \t");
-			sb.append(pointsRouges + "\t");
+			sb.append(pointsRouges + " point(s)\t");
 		} else if (pointsRouges > 0) {
 			sb.append("Type : Rouge \t");
-			sb.append(pointsRouges + "\t");
+			sb.append(pointsRouges + " point(s)\t");
 		} else if (pointsVerts > 0) {
 			sb.append("Type : Vert \t");
-			sb.append(pointsVerts + "\t");
+			sb.append(pointsVerts + " point(s)\t");
 		} else if (pointsBleus > 0) {
 			sb.append("Type : Bleu \t");
-			sb.append(pointsBleus + "\t");
+			sb.append(pointsBleus + " point(s)\t");
 		}
 		sb.append("Capacité : ");
 		sb.append(description + "\n");

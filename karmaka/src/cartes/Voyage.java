@@ -56,22 +56,22 @@ public class Voyage extends Carte implements Serializable {
 					console.afficher("Voulez-vous jouer cette carte pour ses points [1], son pouvoir [2], ou votre Vie Future [3]?");
 					choix = console.lireInt();
 				}
+				Carte carteChoisie = joueur.getMain().get(choixCarte);
+				switch (choix) {
+				case 1:
+					joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getOeuvre());
+					break;
+				case 2:
+					Joueur joueurAdverse = determinerJoueurAdverse(joueur);
+					joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueurAdverse.getTempo());
+					carteChoisie.activerCapacite(joueur);
+					break;
+				case 3:
+					joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getVieFuture());
+					break;
+				}
 			} else if (joueur instanceof JoueurVirtuel) {
 				joueur.jouer();
-			}
-			Carte carteChoisie = joueur.getMain().get(choixCarte);
-			switch (choix) {
-			case 1:
-				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getOeuvre());
-				break;
-			case 2:
-				Joueur joueurAdverse = determinerJoueurAdverse(joueur);
-				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueurAdverse.getTempo());
-				carteChoisie.activerCapacite(joueur);
-				break;
-			case 3:
-				joueur.deplacerCarte(carteChoisie, joueur.getMain(), joueur.getVieFuture());
-				break;
 			}
 		}
 		

@@ -26,9 +26,6 @@ public class DernierSouffle extends Carte implements Serializable {
 			if (joueur instanceof JoueurHumain) {
 				console.afficher("Votre adversaire va défausser une carte de sa Main.");
 			}
-			if (joueur instanceof JoueurHumain) {
-				console.afficher("Vous devez défausser une carte de votre Main");
-			}
 			if (joueurAdverse instanceof JoueurHumain) {
 				console.afficher("\n**********************************************************************");
 				console.afficher("/!\\ Choix pour " + joueurAdverse.getNom() + " /!\\");

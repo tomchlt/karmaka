@@ -19,14 +19,15 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 		// on vérifie si l'adversaire a transmis une carte au joueur
 		if (tempo.size() > 0) {
 			Iterator<Carte> it = tempo.iterator();
-			int numCarte = 1;
 			while (it.hasNext()) {
 				Carte carte = it.next();
 				int choix = 0;
 				choix = strategie.garderCarte();
 				if (choix == 1) {
+					console.afficher("L'adversaire garde la carte " + carte.getNom() + " que vous lui avez transmis.");
 					deplacerCarte(carte, tempo, main);
 				} else {
+					console.afficher("L'adversaire défausse la carte " + carte.getNom() + " que vous lui avez transmis.");
 					defausser(carte, tempo);
 				}
 			}
@@ -102,20 +103,26 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 	public void jouer() {
 		int choix = strategie.jouerCarte(this);
 		Carte carteChoisie = null;
-		if (choix == 1) {
-			carteChoisie = strategie.choisirCarteOeuvre(this);
-			deplacerCarte(carteChoisie, main, oeuvre);
-			console.afficher("Le joueur adverse place dans ses oeuvres la carte ");
-			console.afficher(carteChoisie.toString());
-		} else if (choix == 2) {
-			carteChoisie = strategie.choisirCarteDéfausser(this, this.getMain());
-			carteChoisie.activerCapacite(this);
-			console.afficher("Le joueur adverse joue pour ses pouvoirs la carte ");
-			console.afficher(carteChoisie.toString());
-		} else if (choix == 3) {
-			carteChoisie = strategie.choisirCarteVieFuture(this);
-			deplacerCarte(carteChoisie, main, vieFuture);
-			console.afficher("Le joueur adverse place une carte dans sa Vie Future");
+		switch (choix) {
+			case 1:
+				carteChoisie = strategie.choisirCarteOeuvre(this);
+				console.afficher("Le joueur adverse place dans ses oeuvres la carte " + carteChoisie.getNom());
+				console.afficher(carteChoisie.toString());
+				deplacerCarte(carteChoisie, main, oeuvre);
+				break;
+			case 2:
+				carteChoisie = strategie.choisirCarteDéfausser(this, this.getMain());
+				console.afficher("Le joueur adverse joue pour ses pouvoirs la carte " + carteChoisie.getNom());
+				console.afficher(carteChoisie.toString());
+				Joueur joueurAdverse = carteChoisie.determinerJoueurAdverse(this);
+				deplacerCarte(carteChoisie, main, joueurAdverse.getTempo());
+				carteChoisie.activerCapacite(this);
+				break;
+			case 3:
+				carteChoisie = strategie.choisirCarteVieFuture(this);
+				console.afficher("Le joueur adverse place une carte dans sa Vie Future");
+				deplacerCarte(carteChoisie, main, vieFuture);
+				break;
 		}
 	}
 

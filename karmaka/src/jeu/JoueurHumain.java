@@ -15,19 +15,18 @@ public class JoueurHumain extends Joueur implements Serializable {
 		
 		// on vérifie si l'adversaire a transmis une carte au joueur
 		if (tempo.size()>0) {
-			console.afficher("L'adversaire vous a transmis " + tempo.size() + " cartes durant son tour.");
+			console.afficher("L'adversaire vous a transmis " + tempo.size() + " carte(s) durant son tour.");
 			Iterator<Carte> it = tempo.iterator();
 			int numCarte = 1;
 			while (it.hasNext()) {
 				Carte carte = it.next();
-				console.afficher("Carte [" + numCarte + "] : \n");
-				console.afficher(carte);
+				console.afficher("[" + numCarte + "] \t" + carte);
 				int choix = 0;
 				while (choix!=1 && choix!=2) {
-					console.afficher("Voulez-vous défausser cette carte ou la mettre dans votre main ?");
+					console.afficher("Voulez-vous défausser cette carte [1] ou la mettre dans votre main [2] ?");
 					choix = console.lireInt();
 				}
-				if (choix==1) {
+				if (choix==2) {
 					deplacerCarte(carte, tempo, main);
 				}
 				else {
@@ -47,6 +46,7 @@ public class JoueurHumain extends Joueur implements Serializable {
 			
 			// si la pile du joueur n'est pas vide, il y pioche une carte
 			if (pile.size()>0) {
+				console.afficher("Vous piochez 1 carte dans votre Pile.");
 				piocher();
 			}
 			else {
@@ -55,8 +55,12 @@ public class JoueurHumain extends Joueur implements Serializable {
 			
 			// on affiche les informations nécessaires pour la prise de décision au joueur
 			console.afficher("Vous avez " + pile.size() + " carte(s) dans votre Pile, et " + vieFuture.size() + " carte(s) dans votre Vie Future.");
-			console.afficher("Voici les cartes dans vos Oeuvres : \n");
-			afficherCartes(oeuvre);
+			if (oeuvre.size()>0) {
+				console.afficher("Voici les cartes dans vos Oeuvres : \n");
+				afficherCartes(oeuvre);
+			} else {
+				console.afficher("Vous n'avez aucune carte dans vos Oeuvres.");
+			}
 			console.afficher("Voici les cartes dans votre Main : \n");
 			afficherCartes(main);
 			

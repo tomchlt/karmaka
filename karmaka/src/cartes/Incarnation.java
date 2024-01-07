@@ -24,8 +24,8 @@ public class Incarnation extends Carte implements Serializable {
 			int choixCarte = -1;
 			Carte carteChoisie =  null;
 			if (joueur instanceof JoueurHumain) {
-				console.afficher("Cartes dans votre Main :");
-				((JoueurHumain) joueur).afficherCartes(joueur.getMain());
+				console.afficher("Cartes dans vos Oeuvres :");
+				((JoueurHumain) joueur).afficherCartes(joueur.getOeuvre());
 				while (choixCarte<0 || choixCarte>=joueur.getOeuvre().size()) {
 					console.afficher("De quelle carte voulez-vous copier le pouvoir ? (Entrez le numéro de cette carte)");
 					choixCarte = console.lireInt();

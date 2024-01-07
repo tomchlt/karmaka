@@ -1,0 +1,10 @@
+Cartes pas encore testées :
+Transmigration, Destinee, RevesBrises, Duperie, Vol, Lendemain,
+Jubile, Panique, DernierSouffle, Crise, Fournaise, Vengeance,
+Bassesse, Incarnation, Mimetisme
+
+Cartes qui ne marchent pas :
+(Deni, Semis, Longevite, Sauvetage, Recyclage, Transmigration --> il ne se passe rien)
+
+Cartes dont le pouvoir foncionne :
+Roulette, Voyage, CoupDOeil

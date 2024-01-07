@@ -92,7 +92,7 @@ public class Partie implements Serializable {
 		
 		int choix = 0;
 		while (choix != 1 && choix != 2) {
-			console.afficher("Voulez-vous jouer contre l'ordinateur [1] ou contre quelqu'un [2] ?");
+			console.afficher("Voulez-vous jouer contre quelqu'un [1] ou contre l'ordinateur [2] ?");
 			choix = console.lireInt();
 		}
 
@@ -147,15 +147,15 @@ public class Partie implements Serializable {
 	}
 
 	public void jouer() {
-		console.afficher("La partie commence !");
+		console.afficher("\nLa partie commence !\n");
 		while (joueur1.getAGagne() == false && joueur2.getAGagne() == false) {
-			console.afficher("---------------| TOUR " + numTour + " |---------------\n\n");
+			console.afficher("------------------------------| TOUR " + numTour + " |------------------------------\n");
 			// le joueur 1 joue son tour
-			console.afficher("---------------| Tour de " + joueur1.getNom() + "|---------------\n");
+			console.afficher("------------------------------| Tour de " + joueur1.getNom() + " |------------------------------\n");
 			joueur1.tour();
 			// le joueur 2 joue son tour sauf si le joueur 1 a gagné la partie
 			if (joueur1.getAGagne() == false) {
-				console.afficher("---------------| Tour de " + joueur2.getNom() + "|---------------\n");
+				console.afficher("------------------------------| Tour de " + joueur2.getNom() + " |------------------------------\n");
 				joueur2.tour();
 			}
 			numTour ++;
@@ -269,10 +269,8 @@ public class Partie implements Serializable {
 	 */
 	public static void introduction() {
 		console.afficher("Bienvenue à Karmaka, le jeu de cartes compétitif se déroulant sur plusieurs vies.");
-		console.afficher(
-				"Chaque joueur entame la partie en tant que Bousier avec des cartes en main et sa propre Pile. Lorsque vous êtres à court de cartes, votre vie s'achève et vous vous réincarnez pour une nouvelle vie qui se déroulera, espérons-le, un échelon plus haut sur l'Échelle Karmique. pour ce faire, vous devez cumuler suffisamment de points dans chaque vie, sous peine de devoir la revivre. Toutefois, ne vous attardez pas trop dans une vie, car un rival pourrait bien prendre les devants. Le premier joueur à atteindre la Transcendance gagne !");
-		console.afficher(
-				"Marquez des points, préparez le terrain de votre prochaine vie et si nécessaire, semez des embûches sur le chemin de vos rivaux. Souvenez-vous cependant que l'on récolte ce que l'on sème, et que vos actions auront des conséquences dans cette vie... et dans la suivante.");
+		console.afficher("Chaque joueur entame la partie en tant que Bousier avec des cartes en main et sa propre Pile. Lorsque vous êtes à court de cartes, votre vie s'achève et vous vous réincarnez pour une nouvelle vie qui se déroulera, espérons-le, un échelon plus haut sur l'Échelle Karmique. pour ce faire, vous devez cumuler suffisamment de points dans chaque vie, sous peine de devoir la revivre. Toutefois, ne vous attardez pas trop dans une vie, car un rival pourrait bien prendre les devants. Le premier joueur à atteindre la Transcendance gagne !");
+		console.afficher("Marquez des points, préparez le terrain de votre prochaine vie et si nécessaire, semez des embûches sur le chemin de vos rivaux. Souvenez-vous cependant que l'on récolte ce que l'on sème, et que vos actions auront des conséquences dans cette vie... et dans la suivante.\n");
 	}
 	
 	/**
@@ -412,6 +410,8 @@ public class Partie implements Serializable {
 			}
 		if (choix == 1) {
 				partie = chargerPartie();	
+			} else {
+				partie = creerNouvellePartie();
 			}
 		// sinon, on crée directement une nouvelle partie
 		} else {

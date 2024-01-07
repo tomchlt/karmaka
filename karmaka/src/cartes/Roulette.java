@@ -36,6 +36,7 @@ public class Roulette extends Carte implements Serializable {
 					console.afficher("Quelle carte voulez-vous défausser ? (Entrez le numéro de la carte)");
 					choixCarte1 = console.lireInt();
 				}
+				carteChoisie1 = joueur.getMain().get(choixCarte1);
 			} else if (joueur instanceof JoueurVirtuel) {
 				choixJouerCarte1 = random.nextInt(2);
 				if (choixJouerCarte1 == 1) {
@@ -45,7 +46,6 @@ public class Roulette extends Carte implements Serializable {
 							.choisirCarteDéfausser((JoueurVirtuel) joueur, joueur.getMain());
 				}
 			}
-			carteChoisie1 = joueur.getMain().get(choixCarte1);
 			joueur.defausser(carteChoisie1, joueur.getMain());
 			nbCartesAPuiser++;
 
@@ -70,10 +70,11 @@ public class Roulette extends Carte implements Serializable {
 				if (choixContinuer == 1) {
 					int choixCarte2 = -1;
 					if (joueur instanceof JoueurHumain) {
-						while (choixContinuer != 1 && choixContinuer != 2) {
+						while (choixCarte2 != 1 && choixCarte2 != 2) {
 							console.afficher("Quelle carte voulez-vous défausser ? (Entrez le numéro de la carte)");
 							choixCarte2 = console.lireInt();
 						}
+						carteChoisie2 = joueur.getMain().get(choixCarte2);
 					} else if (joueur instanceof JoueurVirtuel) {
 						if (choixJouerCarte1 == 1) {
 							int choixJouerCarte2 = random.nextInt(2);
@@ -86,7 +87,6 @@ public class Roulette extends Carte implements Serializable {
 							}
 						}
 					}
-					carteChoisie2 = joueur.getMain().get(choixCarte2);
 					joueur.defausser(carteChoisie2, joueur.getMain());
 					nbCartesAPuiser++;
 				}

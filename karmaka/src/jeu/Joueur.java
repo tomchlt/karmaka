@@ -89,17 +89,17 @@ public abstract class Joueur implements Serializable {
 	/**
 	 * Méthode abstraite qui décrit le tour d'un joueur.
 	 */
-	public void tour() {}
+	public abstract void tour();
 	
 	/**
 	 * Méthode abstraite qui décrit la réincarnation d'un joueur pendant son tour.
 	 */
-	public void seReincarner() {}
+	public abstract void seReincarner();
 
 	/**
 	 * Méthode abstraite qui décrit comment un joueur peut jouer une carte.
 	 */
-	public void jouer() {}
+	public abstract void jouer();
 	
 	/**
 	 * Déplace une carte d'un emplacement vers un autre.

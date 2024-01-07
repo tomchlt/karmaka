@@ -53,6 +53,8 @@ public class CoupDOeil extends Carte implements Serializable {
 		if (choixContinuer == 1) {
 			if (joueur instanceof JoueurHumain) {
 				console.afficher("Vous jouez une autre Carte");
+				console.afficher("Cartes dans votre Main :");
+				((JoueurHumain) joueur).afficherCartes(joueur.getMain());
 			}
 			if (joueur instanceof JoueurVirtuel) {
 				console.afficher("Le Joueur Virtuel joue une autre carte");
