@@ -1,7 +1,3 @@
-Cartes pas encore testées :
-
-Fournaise
--------------------------------------------------------------
 Cartes qui ne marchent pas :
 
 Deni, Semis, Longevite, Sauvetage, Recyclage, Transmigration, Lendemain, Fournaise --> il ne se passe rien

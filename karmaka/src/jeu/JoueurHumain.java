@@ -54,6 +54,10 @@ public class JoueurHumain extends Joueur implements Serializable {
 			}
 			
 			// on affiche les informations nécessaires pour la prise de décision au joueur
+			console.afficher("Il vous faut " + niveauKarmique.getPointsRequis() + " points pour passer au niveau supérieur de l'Echelle Karmique.");
+			if (nbAnneauxKarmiques>0) {
+				console.afficher("Vous avez " + nbAnneauxKarmiques + " anneau(x) karmique(s).");
+			}
 			console.afficher("Vous avez " + pile.size() + " carte(s) dans votre Pile, et " + vieFuture.size() + " carte(s) dans votre Vie Future.");
 			if (oeuvre.size()>0) {
 				console.afficher("Voici les cartes dans vos Oeuvres : \n");
