@@ -5,13 +5,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class StrategieAvance extends Strategie implements Serializable {
+public class StrategieAvance implements Strategie, Serializable {
 
 	private static final long serialVersionUID = 7342181931506016916L;
 	private boolean oeuvreProtegee;
 
 	public StrategieAvance() {
-		super("Avancée", "Une difficulté qui apporte un peu plus de challenge");
 		this.oeuvreProtegee = false;
 	}
 
@@ -31,10 +30,15 @@ public class StrategieAvance extends Strategie implements Serializable {
 		return carteAJouer;
 	}
 
-	public Carte choisirCarteDéfausser(JoueurVirtuel joueurV, LinkedList<Carte> emplacement) {
+	public Carte choisirCarteDefausser(JoueurVirtuel joueurV, LinkedList<Carte> emplacement) {
 		LinkedList<Carte> cartesAChoisir = trouverCartesCouleurMinEmplacement(joueurV, emplacement);
 		Carte carteAJouer = trouverCartePtsMin(cartesAChoisir);
 		return carteAJouer;
+	}
+	
+
+	public Carte selectionnerCarte(LinkedList<Carte> cartesAChoisir) {
+		return trouverCartePtsMax(cartesAChoisir);
 	}
 
 	public int jouerCarte(JoueurVirtuel joueurV) {
@@ -68,6 +72,44 @@ public class StrategieAvance extends Strategie implements Serializable {
 
 	public int passerTour() {
 		return 2;
+	}
+
+	public Carte trouverCartePtsMax(LinkedList<Carte> cartesAChoisir) {
+		Carte carteAJouer = null;
+		Iterator<Carte> itChoisir = cartesAChoisir.iterator();
+
+		// on parcourt cette liste pour déterminer celle qui à le plus
+		// grand nombre de points
+		int carteValeurTest = 0;
+		Carte carteTest2 = null;
+		while (itChoisir.hasNext()) {
+			carteTest2 = itChoisir.next();
+			// on isole celle qui vaut le plus de points de la bonne couleur
+			if (carteTest2.getPoints() > carteValeurTest) {
+				carteValeurTest = carteTest2.getPoints();
+				carteAJouer = carteTest2;
+			}
+		}
+		return carteAJouer;
+	}
+
+	public Carte trouverCartePtsMin(LinkedList<Carte> cartesAChoisir) {
+		Carte carteAJouer = null;
+		Iterator<Carte> itChoisir = cartesAChoisir.iterator();
+
+		// on parcourt cette liste pour déterminer celle qui à le plus
+		// grand nombre de points
+		int carteValeurTest = 5;
+		Carte carteTest2 = null;
+		while (itChoisir.hasNext()) {
+			carteTest2 = itChoisir.next();
+			// on isole celle qui vaut le plus de points de la bonne couleur
+			if (carteTest2.getPoints() < carteValeurTest) {
+				carteValeurTest = carteTest2.getPoints();
+				carteAJouer = carteTest2;
+			}
+		}
+		return carteAJouer;
 	}
 
 	public int[] compterPoints(LinkedList<Carte> liste) {
@@ -243,14 +285,6 @@ public class StrategieAvance extends Strategie implements Serializable {
 		return cartesAChoisir;
 	}
 
-	public Carte trouverCartePtsMax(LinkedList<Carte> cartesAChoisir) {
-		return super.trouverCartePtsMax(cartesAChoisir);
-	}
-
-	public Carte trouverCartePtsMin(LinkedList<Carte> cartesAChoisir) {
-		return super.trouverCartePtsMin(cartesAChoisir);
-	}
-
 	public boolean isOeuvreProtegee() {
 		return oeuvreProtegee;
 	}
@@ -259,7 +293,4 @@ public class StrategieAvance extends Strategie implements Serializable {
 		this.oeuvreProtegee = oeuvreProtegee;
 	}
 
-	public Carte selectionnerCarte(LinkedList<Carte> cartesAChoisir) {
-		return super.trouverCartePtsMax(cartesAChoisir);
-	}
 }

@@ -39,7 +39,7 @@ public class Crise extends Carte implements Serializable {
 				carteChoisie = joueurAdverse.getOeuvre().get(choixCarte);
 				console.afficher("**********************************************************************\n");
 			} else if (joueurAdverse instanceof JoueurVirtuel) {
-				carteChoisie = ((JoueurVirtuel) joueurAdverse).getStrategie().choisirCarteDéfausser((JoueurVirtuel)joueurAdverse, joueurAdverse.getOeuvre());
+				carteChoisie = ((JoueurVirtuel) joueurAdverse).getStrategie().choisirCarteDefausser((JoueurVirtuel)joueurAdverse, joueurAdverse.getOeuvre());
 				console.afficher("Le Joueur Virtuel adverse défausse de ses Oeuvres la carte : ");
 				console.afficher(carteChoisie.toString());
 			}

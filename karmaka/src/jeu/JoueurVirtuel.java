@@ -128,7 +128,7 @@ public class JoueurVirtuel extends Joueur implements Serializable {
 				deplacerCarte(carteChoisie, main, oeuvre);
 				break;
 			case 2:
-				carteChoisie = strategie.choisirCarteDéfausser(this, this.getMain());
+				carteChoisie = strategie.choisirCarteDefausser(this, this.getMain());
 				console.afficher("Le joueur adverse joue pour ses pouvoirs la carte " + carteChoisie.getNom());
 				console.afficher(carteChoisie.toString());
 				Joueur joueurAdverse = carteChoisie.determinerJoueurAdverse(this);

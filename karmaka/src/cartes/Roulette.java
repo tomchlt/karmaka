@@ -43,7 +43,7 @@ public class Roulette extends Carte implements Serializable {
 					console.afficher(
 							"Le Joueur Virtuel défausse une première carte de sa Main et peut en défausser une autre");
 					carteChoisie1 = ((JoueurVirtuel) joueur).getStrategie()
-							.choisirCarteDéfausser((JoueurVirtuel) joueur, joueur.getMain());
+							.choisirCarteDefausser((JoueurVirtuel) joueur, joueur.getMain());
 				}
 			}
 			joueur.defausser(carteChoisie1, joueur.getMain());
@@ -81,7 +81,7 @@ public class Roulette extends Carte implements Serializable {
 							if (choixJouerCarte2 == 1) {
 								console.afficher("Le Joueur Virtuel défausse une seconde carte");
 								carteChoisie2 = ((JoueurVirtuel) joueur).getStrategie()
-										.choisirCarteDéfausser((JoueurVirtuel) joueur, joueur.getMain());
+										.choisirCarteDefausser((JoueurVirtuel) joueur, joueur.getMain());
 							} else {
 								console.afficher("Le Joueur Virtuel ne défausse pas de seconde carte");
 							}

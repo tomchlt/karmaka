@@ -40,7 +40,7 @@ public class DernierSouffle extends Carte implements Serializable {
 				console.afficher("**********************************************************************\n");
 			} else if (joueurAdverse instanceof JoueurVirtuel) {
 				carteChoisie = ((JoueurVirtuel) joueurAdverse).getStrategie()
-						.choisirCarteDéfausser((JoueurVirtuel) joueurAdverse, joueurAdverse.getMain());
+						.choisirCarteDefausser((JoueurVirtuel) joueurAdverse, joueurAdverse.getMain());
 				console.afficher("Le Joueur Virtuel adverse défausse de sa Main la carte : ");
 				console.afficher(carteChoisie.toString());
 			}

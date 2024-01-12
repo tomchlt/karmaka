@@ -146,6 +146,9 @@ public class Partie implements Serializable {
 		return partie;
 	}
 
+	/**
+	 * Lance la partie une fois qu'elle a été créée ou qu'elle a été chargée.
+	 */
 	public void jouer() {
 		console.afficher("\nLa partie commence !");
 		while (joueur1.getAGagne() == false && joueur2.getAGagne() == false) {
